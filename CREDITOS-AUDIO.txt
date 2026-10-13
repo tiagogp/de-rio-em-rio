@@ -1,0 +1,51 @@
+RIO VIVO - Audio v0.9.9
+
+Recordings released under CC0 1.0:
+https://creativecommons.org/publicdomain/zero/1.0/
+
+Joseph Sardin / BigSoundBank
+Watercourse #2: https://bigsoundbank.com/watercourse-2-s3133.html
+Wind in Tall Grass: https://bigsoundbank.com/wind-in-tall-grass-s0908.html
+Rain on Puddle: https://bigsoundbank.com/rain-on-puddle-s1290.html
+Fishing reel, fast: https://bigsoundbank.com/fishing-reel-fast-s1435.html
+Edits: excerpts, mono conversion, filtering, gain, loop crossfades, 48 kHz PCM16.
+The water recording is from France, not a recording of the Pantanal.
+
+ezwa; excerpts edited by qubodup / OpenGameArt
+6 Short water splashes: https://opengameart.org/content/6-short-water-splashes
+Original foley: emptying a syringe in water. These are not fish field recordings.
+Edits: gain, filtering, fades and resampling. Some clips layered with interface cues.
+
+Kenney / Interface Sounds
+https://kenney.nl/assets/interface-sounds
+Edits: selected cues, mono conversion, gain, filtering and fades.
+
+RIO VIVO authored material:
+Retained synthetic fauna fallback; cast replaced with recordings in v1.0.23.
+Bite, hook, catch and warning are offline composites; see sources.json.
+
+Freesound original downloads are not included in this first integration.
+Regional fauna and original fishing recordings remain pending authenticated download.
+No CC BY-NC material is included.
+
+
+v1.0.23 — fishing cast and bait contact (CC0)
+Dalesome — Woosh (stick swung in the air)
+https://freesound.org/people/Dalesome/sounds/352719/
+fennelliott — fishing reel.wav
+https://freesound.org/people/fennelliott/sounds/347840/
+dslrguide — Tiny Splash
+https://freesound.org/people/dslrguide/sounds/321490/
+Also distributed at https://pixabay.com/sound-effects/film-special-effects-tiny-splash-83778/
+Public HQ MP3 previews from the original CC0 Freesound pages were used, not original WAV downloads.
+Edits: 48 kHz mono PCM16, trim, resampling, gain, short fades. Cast123 mixes woosh and a 0.58 s reel excerpt, offset by 0.10 s; total 0.70 s. Plop123 is a 0.80 s splash excerpt, triggered at water contact.
+License: https://creativecommons.org/publicdomain/zero/1.0/
+
+
+v1.0.28 — trilha fornecida pelo usuário
+Amanhecer: Pantanal at Dawn
+Dia: Ribeira de Sol
+Entardecer: Golden Hour on the River
+Noite: Pantanal Moonlight
+Originais preservados em SourceAssets/Audio/Music. Autoria e licença não especificadas na entrega.
+Tratamento: conversão estéreo 44,1 kHz, ajuste uniforme de nível, remoção de DC e fades suaves.

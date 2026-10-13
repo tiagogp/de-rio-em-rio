@@ -1,0 +1,47 @@
+DE RIO EM RIO — créditos
+Jogo em desenvolvimento. Parte da arte e da música é provisória.
+
+CRIAÇÃO
+Tiago Guimarães Pinto — criação, game design, programação e direção visual
+Santo Antônio de Leverger, Mato Grosso
+
+ARTE
+Vegetação: Stylized Nature MegaKit (Standard), Quaternius — CC0 1.0
+  https://quaternius.itch.io/stylized-nature-megakit
+Barcos e vara: Boats, AlstraInfinite — Free Asset License
+  https://alstrainfinite.itch.io/boats
+Tuiuiú: modelo gerado com Tripo3D pelo autor, com rig e animação do projeto
+Peixes: modelos gerados com Tripo3D [confirmar]
+Terreno: Terrain Sample Asset Pack, Unity Technologies [confirmar link]
+Grama: baseada no tutorial [autor e link a confirmar]
+Pescador e animações: [origem a confirmar]
+Ilustrações da vila: Houses Pack 3 Free [autor e link a confirmar]
+Bambus, morro, nuvens, aguapés, carandás, trapiche e garças: geometria procedural original
+
+FONTES
+Alegreya SC e Lato — Google Fonts, SIL Open Font License
+
+MÚSICA
+Pantanal at Dawn, Ribeira de Sol, Golden Hour on the River e Pantanal Moonlight
+  Tiago Guimarães Pinto, criadas com Suno (plano Pro)
+
+SONS
+Aves: 27 gravações de 18 espécies na seleção integrada.
+  Licenças por gravação em CREDITOS-AVES.txt.
+  Autores, fontes e modificações em CREDITOS-AVES.txt.
+Água, vento, chuva, carretilha, respingos e interface: gravações CC0 de
+  Joseph Sardin / BigSoundBank, ezwa e qubodup / OpenGameArt, Kenney,
+  Dalesome, fennelliott e dslrguide / Freesound.
+  Detalhes em CREDITOS-AUDIO.txt.
+
+TECNOLOGIA
+Unity 6 · Universal Render Pipeline · glTFast (Unity Technologies)
+gltfpack / meshoptimizer (MIT) · Blender
+Céu: Dyna-Wet, RayznGames — https://github.com/RayznGames/Dyna-Wet
+
+Os rios do jogo são interpretações estilizadas de lugares reais de Mato Grosso.
+Os cantos de aves são gravações reais, mas não foram gravados nos rios do jogo.
+
+IDENTIDADE VISUAL
+Logo, banner e ícone criados para o projeto com assistência de image_gen / Codex.
+Prompts e originais em SourceAssets/Branding132.

@@ -1,0 +1,1 @@
+Ícones originais do pacote de-rio-em-rio-handoff, fornecido pelo autor do projeto em outubro de 2026. Desenhos vetoriais esquemáticos criados com assistência de IA, sem biblioteca de ícones de terceiros conforme a documentação do pacote. Adaptados para UI do DE RIO EM RIO.
