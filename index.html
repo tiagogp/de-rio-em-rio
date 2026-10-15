@@ -12,7 +12,9 @@
 <meta property="og:image" content="https://tiagogp.github.io/de-rio-em-rio/img/nevoa.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#10271f">
-<link rel="icon" href="img/icone.png">
+<link rel="icon" href="img/icone-64.png">
+<link rel="apple-touch-icon" href="img/icone-180.png">
+<link rel="preload" as="image" href="img/nevoa.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Alegreya+SC:wght@500;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
@@ -24,26 +26,29 @@
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--text);font:17px/1.6 Lato,system-ui,sans-serif}
-img{display:block;max-width:100%}
+img{display:block;max-width:100%;height:auto}
 a{color:var(--gold)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
 h1,h2,h3{font-family:"Alegreya SC",Georgia,serif;font-weight:700;line-height:1.15;margin:0}
+code{font:14px/1.5 ui-monospace,Consolas,monospace}
 .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
 
 /* Navegação */
-nav{position:fixed;inset:0 0 auto;z-index:10;background:linear-gradient(rgba(11,29,23,.92),rgba(11,29,23,0));}
+nav{position:fixed;inset:0 0 auto;z-index:10;background:linear-gradient(rgba(11,29,23,.92),rgba(11,29,23,0));transition:background-color .25s,box-shadow .25s}
+nav.cheia{background:rgba(11,29,23,.96);box-shadow:0 1px 0 var(--line)}
 nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
 nav .marca{display:flex;align-items:center;gap:10px;color:var(--text);text-decoration:none;font-family:"Alegreya SC",serif;font-size:19px}
 nav .marca img{width:30px;height:30px;border-radius:6px}
 nav ul{display:flex;gap:26px;list-style:none;margin:0;padding:0}
-nav ul a{color:var(--text);text-decoration:none;font-size:15px}
+nav ul a{color:var(--text);text-decoration:none;font-size:15px;padding:6px 0;border-bottom:2px solid transparent}
 nav ul a:hover{color:var(--gold)}
+nav ul a.aqui{border-bottom-color:var(--gold)}
 
 /* Capa */
 .capa{position:relative;min-height:min(100vh,860px);display:flex;align-items:flex-end;padding:120px 0 72px;
   background:linear-gradient(90deg,rgba(11,29,23,.9) 0%,rgba(11,29,23,.55) 45%,rgba(11,29,23,0) 75%),linear-gradient(0deg,var(--bg) 0%,rgba(16,39,31,0) 30%),url(img/nevoa.jpg) 60% center/cover}
 .capa .wrap{width:100%}
-.capa .local{color:var(--gold);font-size:14px;letter-spacing:.06em}
-.capa .logo{width:min(440px,80vw);margin:14px 0 6px}
+.capa .logo{width:min(440px,80vw);margin:0 0 6px}
 .capa .linha{font-size:22px;max-width:30ch;margin:0 0 28px}
 .botoes{display:flex;flex-wrap:wrap;gap:14px}
 .botao{display:inline-block;padding:13px 24px;border-radius:6px;font-weight:700;text-decoration:none;border:1px solid var(--gold)}
@@ -55,23 +60,28 @@ nav ul a:hover{color:var(--gold)}
 
 section{padding:96px 0}
 .titulo{margin-bottom:36px}
-.titulo h2{font-size:clamp(30px,4vw,42px)}
+.titulo h2,.sobre h2{font-size:clamp(30px,4vw,42px)}
 .titulo p{color:var(--muted);max-width:62ch;margin:12px 0 0}
 
 /* O jogo */
-.sobre{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center;margin-bottom:72px}
+.sobre{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+.sobre h2{margin-bottom:18px}
 .sobre p{margin:0 0 14px}
-.sobre img{border-radius:8px}
-.destaques{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
-.destaque{background:var(--panel);border-radius:8px;overflow:hidden}
-.destaque img{aspect-ratio:16/10;object-fit:cover;width:100%}
-.destaque div{padding:18px 18px 22px}
-.destaque h3{font-size:20px;margin-bottom:8px}
-.destaque p{margin:0;color:var(--muted);font-size:15px}
+.sobre img,.cena img{border-radius:8px}
+.cena{display:grid;grid-template-columns:1.4fr 1fr;gap:48px;align-items:center;margin-top:88px}
+.cena:nth-child(2){grid-template-columns:1fr 1.15fr}
+.cena:nth-child(3){grid-template-columns:1.25fr 1fr}
+.cena:nth-child(4){grid-template-columns:1fr 1.4fr}
+.cena:nth-child(even) img{order:2}
+.cena h3{font-size:28px;margin-bottom:12px}
+.cena p{margin:0;color:var(--muted);max-width:42ch}
 
 /* Rios */
 .rios{background:var(--bg-2)}
-.lista-rios{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.lista-rios{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;list-style:none;margin:0;padding:0;position:relative}
+.lista-rios::before{content:"";position:absolute;top:7px;left:calc(100%/6);right:calc(100%/6);height:2px;background:var(--line)}
+.barco{position:relative;text-align:center;padding-top:24px;margin-bottom:16px;color:var(--gold);font-size:14px}
+.barco::before{content:"";position:absolute;top:0;left:50%;width:16px;height:16px;margin-left:-8px;border-radius:50%;background:var(--bg-2);border:2px solid var(--gold)}
 .rio{position:relative;border-radius:8px;overflow:hidden;min-height:420px;display:flex;align-items:flex-end}
 .rio img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .rio>div{position:relative;width:100%;padding:90px 22px 22px;background:linear-gradient(0deg,rgba(11,29,23,.94) 0%,rgba(11,29,23,.82) 40%,rgba(11,29,23,.45) 72%,rgba(11,29,23,0) 100%)}
@@ -81,9 +91,24 @@ section{padding:96px 0}
 
 /* Galeria */
 .galeria{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.galeria figure{margin:0}
-.galeria img{border-radius:6px;aspect-ratio:16/9;object-fit:cover;width:100%}
-.galeria figcaption{color:var(--muted);font-size:14px;margin-top:6px}
+.galeria figure{margin:0;position:relative;border-radius:6px;overflow:hidden}
+.galeria figure:first-child{grid-column:span 2;grid-row:span 2}
+.galeria button{display:block;width:100%;height:100%;padding:0;border:0;background:none;cursor:zoom-in}
+.galeria img{width:100%;height:100%;aspect-ratio:16/9;object-fit:cover;transition:transform .4s}
+.galeria figure:first-child img{aspect-ratio:auto;position:absolute;inset:0}
+.galeria button:hover img{transform:scale(1.03)}
+.galeria figcaption{position:absolute;left:0;right:0;bottom:0;padding:28px 14px 10px;font-size:14px;color:var(--text);background:linear-gradient(0deg,rgba(11,29,23,.85),rgba(11,29,23,0));pointer-events:none}
+
+.lupa{padding:0;border:0;background:transparent;color:var(--text);max-width:min(1600px,94vw);max-height:94vh;overflow:visible}
+.lupa::backdrop{background:rgba(5,14,11,.93)}
+.lupa img{max-height:82vh;width:auto;margin:0 auto;border-radius:6px}
+.lupa p{margin:10px 0 0;text-align:center;color:var(--muted);font-size:15px}
+.lupa button{position:absolute;width:48px;height:48px;border-radius:50%;border:1px solid var(--gold);background:rgba(11,29,23,.85);color:var(--gold);font-size:26px;line-height:1;cursor:pointer}
+.lupa button:hover{background:rgba(11,29,23,1)}
+.lupa .fechar{top:12px;right:12px;font-size:30px}
+.lupa .antes,.lupa .depois{top:calc(50% - 40px)}
+.lupa .antes{left:12px}
+.lupa .depois{right:12px}
 
 /* Trailer */
 .video{position:relative;aspect-ratio:16/9;border-radius:8px;overflow:hidden;background:#000}
@@ -99,8 +124,12 @@ section{padding:96px 0}
 .caixa h3{font-size:22px;margin:0 0 12px}
 .caixa ol,.caixa ul{margin:0;padding-left:20px}
 .caixa li{margin-bottom:6px}
-.versao{color:var(--muted);font-size:14px;margin:14px 0 0}
-.hash{font:12px/1.5 ui-monospace,Consolas,monospace;word-break:break-all;color:var(--muted);background:var(--panel);padding:10px 12px;border-radius:6px;margin-top:10px}
+.versao{color:var(--muted);font-size:14px;margin:14px 0 0;overflow-wrap:anywhere}
+.hash{display:flex;align-items:center;gap:12px;background:var(--panel);padding:10px 10px 10px 12px;border-radius:6px;margin-top:10px}
+.hash code{flex:1;font-size:12px;word-break:break-all;color:var(--muted)}
+.hash button{flex:none;font:700 13px Lato,sans-serif;color:var(--gold);background:none;border:1px solid var(--line);border-radius:4px;padding:6px 10px;cursor:pointer}
+.hash button:hover{border-color:var(--gold)}
+.versao code{font-size:13px;color:var(--text)}
 .aviso{color:var(--muted);font-size:15px;margin-top:22px}
 
 footer{padding:40px 0 56px;color:var(--muted);font-size:14px;border-top:1px solid var(--line)}
@@ -109,19 +138,35 @@ footer a{color:var(--muted)}
 
 @media (max-width:900px){
   nav ul{gap:16px}
-  .sobre,.caixa{grid-template-columns:1fr}
-  .destaques{grid-template-columns:repeat(2,1fr)}
-  .lista-rios{grid-template-columns:1fr}
+  .sobre,.caixa,.cena,.cena:nth-child(n){grid-template-columns:1fr;gap:22px}
+  .cena{margin-top:56px}
+  .cena:nth-child(even) img{order:0}
+  .lista-rios{grid-template-columns:1fr;gap:30px}
+  .lista-rios::before{display:none}
+  .barco{text-align:left;padding:0 0 0 26px;margin-bottom:10px}
+  .barco::before{left:0;top:3px;margin-left:0}
   .rio{min-height:320px}
-  .galeria{grid-template-columns:repeat(2,1fr)}
+  .lupa button{width:40px;height:40px;font-size:22px}
+  .lupa .fechar{top:8px;right:8px;font-size:26px}
+  .lupa .antes{left:8px}
+  .lupa .depois{right:8px}
 }
 @media (max-width:560px){
   .wrap{padding:0 16px}
-  nav ul li:not(:last-child){display:none}
+  nav .marca span{display:none}
+  nav ul{gap:18px}
   .capa{background-position:62% center}
   .capa .linha{font-size:19px}
-  .destaques,.galeria{grid-template-columns:1fr}
+  .galeria{grid-template-columns:1fr 1fr;gap:10px}
+  .galeria figure:first-child{grid-row:auto}
+  .galeria figure:first-child img{position:static;aspect-ratio:16/9}
+  .galeria figure:last-child{grid-column:span 2}
+  .galeria figcaption{display:none}
   section{padding:72px 0}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .galeria img,nav{transition:none}
 }
 </style>
 </head>
@@ -129,7 +174,7 @@ footer a{color:var(--muted)}
 
 <nav>
   <div class="wrap">
-    <a class="marca" href="#"><img src="img/icone.png" alt="">De Rio em Rio</a>
+    <a class="marca" href="#"><img src="img/icone-64.png" width="30" height="30" alt=""><span>De Rio em Rio</span></a>
     <ul>
       <li><a href="#jogo">O jogo</a></li>
       <li><a href="#rios">Rios</a></li>
@@ -141,9 +186,8 @@ footer a{color:var(--muted)}
 
 <header class="capa">
   <div class="wrap">
-    <div class="local">Santo Antônio de Leverger · Mato Grosso</div>
-    <h1><img class="logo" src="img/logo.png" alt="De Rio em Rio"></h1>
-    <p class="linha">Jogo de pesca nos rios de Mato Grosso.</p>
+    <h1><img class="logo" src="img/logo-900.png" width="900" height="450" alt="De Rio em Rio"></h1>
+    <p class="linha">Jogo de pesca nos rios de Mato Grosso, feito em Santo Antônio de Leverger.</p>
     <div class="botoes">
       <a class="botao cheio" href="#baixar">Baixar para Windows</a>
       <a class="botao vazio" href="#trailer">Ver o trailer</a>
@@ -157,28 +201,28 @@ footer a{color:var(--muted)}
   <div class="wrap">
     <div class="sobre">
       <div>
-        <h2 style="font-size:clamp(30px,4vw,42px);margin-bottom:18px">Do Cuiabá ao Paraguai</h2>
+        <h2>Do Cuiabá ao Paraguai</h2>
         <p>Você começa no Rio Cuiabá com vara básica e minhoca a 1 m. Vende o que pesca na vila, troca o barco de madeira pelo bote com motor e depois pela lancha, e segue para o Rio Mutum, em Barão de Melgaço, e para o Rio Paraguai, em Cáceres.</p>
         <p>Registre as oito espécies nos três rios no caderno do barqueiro. O último título do jogo é Guardião do Pantanal.</p>
       </div>
-      <img src="img/heroi.jpg" alt="O pescador na lancha ao fim da tarde, no Rio Cuiabá" loading="lazy">
+      <img src="img/heroi.jpg" width="1920" height="1080" alt="O pescador na lancha ao fim da tarde, no Rio Cuiabá" loading="lazy">
     </div>
 
-    <div class="destaques">
-      <article class="destaque">
-        <img src="img/boia.jpg" alt="Boia parada no rio, esperando a fisgada" loading="lazy">
+    <div class="cenas">
+      <article class="cena">
+        <img src="img/boia.jpg" width="1920" height="1080" alt="Boia parada no rio, esperando a fisgada" loading="lazy">
         <div><h3>Hora, isca e profundidade</h3><p>Decidem o que morde. O pacu come de manhã; a cachara sai ao anoitecer. O caderno mostra onde e como procurar cada espécie.</p></div>
       </article>
-      <article class="destaque">
-        <img src="img/salto.jpg" alt="Dourado saltando ao lado do barco" loading="lazy">
+      <article class="cena">
+        <img src="img/salto.jpg" width="1920" height="1080" alt="Dourado saltando ao lado do barco" loading="lazy">
         <div><h3>Cada peixe briga de um jeito</h3><p>O dourado arranca e salta, a piraputanga pede puxadas alternadas, a piranha segue um ritmo e o pintado precisa ser guiado pelo corredor.</p></div>
       </article>
-      <article class="destaque">
-        <img src="img/marina.jpg" alt="Barco passando em frente à vila" loading="lazy">
+      <article class="cena">
+        <img src="img/marina.jpg" width="1920" height="1080" alt="Barco passando em frente à vila" loading="lazy">
         <div><h3>Venda e troque de barco</h3><p>Barco de madeira, bote com motor e lancha. O barco novo libera a viagem para outro rio.</p></div>
       </article>
-      <article class="destaque">
-        <img src="img/foto-trofeu.jpg" alt="Pescador em pé no barco segurando um pacu para a foto" loading="lazy">
+      <article class="cena">
+        <img src="img/foto-trofeu.jpg" width="1280" height="800" alt="Pescador em pé no barco segurando um pacu para a foto" loading="lazy">
         <div><h3>Foto, e depois guardar ou soltar</h3><p>Cinco poses para a foto da captura. Soltar o peixe também conta no caderno.</p></div>
       </article>
     </div>
@@ -188,35 +232,52 @@ footer a{color:var(--muted)}
 <section id="rios" class="rios">
   <div class="wrap">
     <div class="titulo"><h2>Três rios de Mato Grosso</h2><p>Cada destino é uma versão estilizada do lugar real.</p></div>
-    <div class="lista-rios">
-      <article class="rio">
-        <img src="img/morro.jpg" alt="O Rio Cuiabá visto do alto, com o Morro de Santo Antônio ao fundo" loading="lazy">
-        <div><h3>Rio Cuiabá</h3><div class="cidade">Santo Antônio de Leverger</div><p>Morro de Santo Antônio.<br>Lambari, pacu-peva e piranha.</p></div>
-      </article>
-      <article class="rio">
-        <img src="img/mutum.jpg" alt="As curvas do Rio Mutum entre a mata, vistas do alto" loading="lazy">
-        <div><h3>Rio Mutum</h3><div class="cidade">Barão de Melgaço</div><p>Baía de Siá Mariana.<br>Pacu-peva, pacu e piraputanga.</p></div>
-      </article>
-      <article class="rio">
-        <img src="img/paraguai.jpg" alt="O Rio Paraguai com a margem arborizada do Morro Pelado" loading="lazy">
-        <div><h3>Rio Paraguai</h3><div class="cidade">Cáceres</div><p>Morro Pelado.<br>Cachara, dourado e pintado.</p></div>
-      </article>
+    <ol class="lista-rios">
+      <li>
+        <div class="barco">Barco de madeira</div>
+        <article class="rio">
+          <img src="img/morro.jpg" width="1920" height="1080" alt="O Rio Cuiabá visto do alto, com o Morro de Santo Antônio ao fundo" loading="lazy">
+          <div><h3>Rio Cuiabá</h3><div class="cidade">Santo Antônio de Leverger</div><p>Morro de Santo Antônio.<br>Lambari, pacu-peva e piranha.</p></div>
+        </article>
+      </li>
+      <li>
+        <div class="barco">Bote com motor</div>
+        <article class="rio">
+          <img src="img/mutum.jpg" width="1920" height="1080" alt="As curvas do Rio Mutum entre a mata, vistas do alto" loading="lazy">
+          <div><h3>Rio Mutum</h3><div class="cidade">Barão de Melgaço</div><p>Baía de Siá Mariana.<br>Pacu-peva, pacu e piraputanga.</p></div>
+        </article>
+      </li>
+      <li>
+        <div class="barco">Lancha</div>
+        <article class="rio">
+          <img src="img/paraguai.jpg" width="1920" height="1080" alt="O Rio Paraguai com a margem arborizada do Morro Pelado" loading="lazy">
+          <div><h3>Rio Paraguai</h3><div class="cidade">Cáceres</div><p>Morro Pelado.<br>Cachara, dourado e pintado.</p></div>
+        </article>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section aria-label="Imagens do jogo">
+  <div class="wrap">
+    <div class="galeria">
+      <figure><button type="button"><img src="img/amanhecer.jpg" width="1920" height="1080" alt="Névoa ao amanhecer no Rio Cuiabá." loading="lazy"></button><figcaption>Névoa ao amanhecer no Rio Cuiabá.</figcaption></figure>
+      <figure><button type="button"><img src="img/entardecer.jpg" width="1920" height="1080" alt="Fim de tarde diante do Morro de Santo Antônio." loading="lazy"></button><figcaption>Fim de tarde diante do Morro de Santo Antônio.</figcaption></figure>
+      <figure><button type="button"><img src="img/chuva.jpg" width="1920" height="1080" alt="Chuva de verão no Rio Paraguai." loading="lazy"></button><figcaption>Chuva de verão no Rio Paraguai.</figcaption></figure>
+      <figure><button type="button"><img src="img/pacu.jpg" width="1920" height="1080" alt="Pacu saindo da água no Rio Mutum." loading="lazy"></button><figcaption>Pacu saindo da água no Rio Mutum.</figcaption></figure>
+      <figure><button type="button"><img src="img/ceu.jpg" width="1920" height="1080" alt="O dourado no embarque." loading="lazy"></button><figcaption>O dourado no embarque.</figcaption></figure>
+      <figure><button type="button"><img src="img/velocidade.jpg" width="1920" height="1080" alt="A lancha no Rio Cuiabá." loading="lazy"></button><figcaption>A lancha no Rio Cuiabá.</figcaption></figure>
     </div>
   </div>
 </section>
 
-<section>
-  <div class="wrap">
-    <div class="galeria">
-      <figure><img src="img/amanhecer.jpg" alt="" loading="lazy"><figcaption>Névoa ao amanhecer no Rio Cuiabá.</figcaption></figure>
-      <figure><img src="img/chuva.jpg" alt="" loading="lazy"><figcaption>Chuva de verão no Rio Paraguai.</figcaption></figure>
-      <figure><img src="img/pacu.jpg" alt="" loading="lazy"><figcaption>Pacu saindo da água no Rio Mutum.</figcaption></figure>
-      <figure><img src="img/ceu.jpg" alt="" loading="lazy"><figcaption>O dourado no embarque.</figcaption></figure>
-      <figure><img src="img/entardecer.jpg" alt="" loading="lazy"><figcaption>Fim de tarde diante do Morro de Santo Antônio.</figcaption></figure>
-      <figure><img src="img/velocidade.jpg" alt="" loading="lazy"><figcaption>A lancha no Rio Cuiabá.</figcaption></figure>
-    </div>
-  </div>
-</section>
+<dialog class="lupa" aria-label="Imagem ampliada">
+  <img src="" alt="">
+  <p></p>
+  <button type="button" class="fechar" aria-label="Fechar">×</button>
+  <button type="button" class="antes" aria-label="Imagem anterior">‹</button>
+  <button type="button" class="depois" aria-label="Próxima imagem">›</button>
+</dialog>
 
 <section id="trailer">
   <div class="wrap">
@@ -232,9 +293,10 @@ footer a{color:var(--muted)}
     <div class="titulo"><h2>Baixar para Windows</h2><p>Versão jogável em desenvolvimento, para demonstração. Não pede conta nem internet para jogar.</p></div>
     <div class="caixa">
       <div>
-        <a class="botao cheio" href="https://github.com/tiagogp/de-rio-em-rio/releases/download/v1.0.59/DE-RIO-EM-RIO-Windows-v1.0.59.zip">Baixar DE-RIO-EM-RIO-Windows-v1.0.59.zip</a>
-        <p class="versao">Versão 1.0.59 · ZIP · 261 MB · extraia antes de jogar</p>
-        <div class="hash">SHA-256 d30bdabe547c34cf7373df054f01f8adc83c83617086e6f1a4742a5ab6fa338e</div>
+        <a class="botao cheio" href="https://github.com/tiagogp/de-rio-em-rio/releases/download/v1.0.59/DE-RIO-EM-RIO-Windows-v1.0.59.zip">Baixar a versão 1.0.59</a>
+        <p class="versao">DE-RIO-EM-RIO-Windows-v1.0.59.zip · 261 MB · extraia antes de jogar</p>
+        <div class="hash"><code>SHA-256 <span id="sha">d30bdabe547c34cf7373df054f01f8adc83c83617086e6f1a4742a5ab6fa338e</span></code><button type="button" id="copiar">Copiar</button></div>
+        <p class="versao">Para conferir no PowerShell, na pasta do download: <code>Get-FileHash DE-RIO-EM-RIO-Windows-v1.0.59.zip</code></p>
         <p class="versao"><a href="https://github.com/tiagogp/de-rio-em-rio/releases/tag/v1.0.59">Release e checksum no GitHub</a></p>
         <h3 style="margin-top:30px">Requisitos</h3>
         <ul>
@@ -277,6 +339,52 @@ document.querySelector('#video button').addEventListener('click', function () {
   f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
   f.allowFullscreen = true;
   this.replaceWith(f);
+});
+
+// Barra de cima fica sólida fora da capa e marca a seção visível.
+var nav = document.querySelector('nav');
+var links = [].slice.call(nav.querySelectorAll('ul a'));
+function aoRolar() {
+  nav.classList.toggle('cheia', window.scrollY > 40);
+  var atual = null;
+  links.forEach(function (a) {
+    var s = document.querySelector(a.getAttribute('href'));
+    if (s.getBoundingClientRect().top < window.innerHeight * 0.4) atual = a;
+  });
+  links.forEach(function (a) { a.classList.toggle('aqui', a === atual); });
+}
+window.addEventListener('scroll', aoRolar, { passive: true });
+aoRolar();
+
+// Galeria: abre a imagem grande; setas e Esc no teclado.
+var lupa = document.querySelector('.lupa');
+var fotos = [].slice.call(document.querySelectorAll('.galeria img'));
+var vista = 0;
+function mostrar(i) {
+  vista = (i + fotos.length) % fotos.length;
+  lupa.querySelector('img').src = fotos[vista].src;
+  lupa.querySelector('img').alt = fotos[vista].alt;
+  lupa.querySelector('p').textContent = fotos[vista].alt;
+}
+fotos.forEach(function (img, i) {
+  img.parentNode.addEventListener('click', function () { mostrar(i); lupa.showModal(); });
+});
+lupa.querySelector('.fechar').addEventListener('click', function () { lupa.close(); });
+lupa.querySelector('.antes').addEventListener('click', function () { mostrar(vista - 1); });
+lupa.querySelector('.depois').addEventListener('click', function () { mostrar(vista + 1); });
+lupa.addEventListener('click', function (e) { if (e.target === lupa) lupa.close(); });
+lupa.addEventListener('keydown', function (e) {
+  if (e.key === 'ArrowLeft') mostrar(vista - 1);
+  if (e.key === 'ArrowRight') mostrar(vista + 1);
+});
+
+// Copiar o SHA-256.
+document.getElementById('copiar').addEventListener('click', function () {
+  var b = this;
+  navigator.clipboard.writeText(document.getElementById('sha').textContent).then(function () {
+    b.textContent = 'Copiado';
+    setTimeout(function () { b.textContent = 'Copiar'; }, 2000);
+  });
 });
 </script>
 </body>
