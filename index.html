@@ -2,390 +2,536 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>De Rio em Rio</title>
-<meta name="description" content="Jogo de pesca nos rios de Mato Grosso, feito em Santo Antônio de Leverger. Rio Cuiabá, Rio Mutum e Rio Paraguai. Para PC Windows.">
+<meta name="description" content="Jogo de pesca nos rios de Mato Grosso, feito em Santo Antônio de Leverger. Rio Cuiabá, Rio Mutum e Rio Paraguai. Grátis para PC Windows.">
 <meta property="og:title" content="De Rio em Rio">
 <meta property="og:description" content="Jogo de pesca nos rios de Mato Grosso, feito em Santo Antônio de Leverger.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://tiagogp.github.io/de-rio-em-rio/">
 <meta property="og:image" content="https://tiagogp.github.io/de-rio-em-rio/img/nevoa.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#10271f">
+<meta name="theme-color" content="#0a1a14">
 <link rel="icon" href="img/icone-64.png">
 <link rel="apple-touch-icon" href="img/icone-180.png">
-<link rel="preload" as="image" href="img/nevoa.jpg">
+<link rel="preload" as="image" href="media/capa.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Alegreya+SC:wght@500;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
-<style>
-:root{
-  --bg:#10271f; --bg-2:#0b1d17; --panel:#173328; --line:rgba(238,208,139,.18);
-  --text:#f4eccc; --muted:#c9c2a4; --gold:#eed08b; --sun:#e8933f;
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--text);font:17px/1.6 Lato,system-ui,sans-serif}
-img{display:block;max-width:100%;height:auto}
-a{color:var(--gold)}
-a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
-h1,h2,h3{font-family:"Alegreya SC",Georgia,serif;font-weight:700;line-height:1.15;margin:0}
-code{font:14px/1.5 ui-monospace,Consolas,monospace}
-.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
-
-/* Navegação */
-nav{position:fixed;inset:0 0 auto;z-index:10;background:linear-gradient(rgba(11,29,23,.92),rgba(11,29,23,0));transition:background-color .25s,box-shadow .25s}
-nav.cheia{background:rgba(11,29,23,.96);box-shadow:0 1px 0 var(--line)}
-nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
-nav .marca{display:flex;align-items:center;gap:10px;color:var(--text);text-decoration:none;font-family:"Alegreya SC",serif;font-size:19px}
-nav .marca img{width:30px;height:30px;border-radius:6px}
-nav ul{display:flex;gap:26px;list-style:none;margin:0;padding:0}
-nav ul a{color:var(--text);text-decoration:none;font-size:15px;padding:6px 0;border-bottom:2px solid transparent}
-nav ul a:hover{color:var(--gold)}
-nav ul a.aqui{border-bottom-color:var(--gold)}
-
-/* Capa */
-.capa{position:relative;min-height:min(100vh,860px);display:flex;align-items:flex-end;padding:120px 0 72px;
-  background:linear-gradient(90deg,rgba(11,29,23,.9) 0%,rgba(11,29,23,.55) 45%,rgba(11,29,23,0) 75%),linear-gradient(0deg,var(--bg) 0%,rgba(16,39,31,0) 30%),url(img/nevoa.jpg) 60% center/cover}
-.capa .wrap{width:100%}
-.capa .logo{width:min(440px,80vw);margin:0 0 6px}
-.capa .linha{font-size:22px;max-width:30ch;margin:0 0 28px}
-.botoes{display:flex;flex-wrap:wrap;gap:14px}
-.botao{display:inline-block;padding:13px 24px;border-radius:6px;font-weight:700;text-decoration:none;border:1px solid var(--gold)}
-.botao.cheio{background:var(--gold);color:#1d1a10}
-.botao.cheio:hover{background:#f6dfa6}
-.botao.vazio{color:var(--gold)}
-.botao.vazio:hover{background:rgba(238,208,139,.1)}
-.capa .info{margin-top:18px;color:var(--muted);font-size:14px}
-
-section{padding:96px 0}
-.titulo{margin-bottom:36px}
-.titulo h2,.sobre h2{font-size:clamp(30px,4vw,42px)}
-.titulo p{color:var(--muted);max-width:62ch;margin:12px 0 0}
-
-/* O jogo */
-.sobre{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
-.sobre h2{margin-bottom:18px}
-.sobre p{margin:0 0 14px}
-.sobre img,.cena img{border-radius:8px}
-.cena{display:grid;grid-template-columns:1.4fr 1fr;gap:48px;align-items:center;margin-top:88px}
-.cena:nth-child(2){grid-template-columns:1fr 1.15fr}
-.cena:nth-child(3){grid-template-columns:1.25fr 1fr}
-.cena:nth-child(4){grid-template-columns:1fr 1.4fr}
-.cena:nth-child(even) img{order:2}
-.cena h3{font-size:28px;margin-bottom:12px}
-.cena p{margin:0;color:var(--muted);max-width:42ch}
-
-/* Rios */
-.rios{background:var(--bg-2)}
-.lista-rios{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;list-style:none;margin:0;padding:0;position:relative}
-.lista-rios::before{content:"";position:absolute;top:7px;left:calc(100%/6);right:calc(100%/6);height:2px;background:var(--line)}
-.barco{position:relative;text-align:center;padding-top:24px;margin-bottom:16px;color:var(--gold);font-size:14px}
-.barco::before{content:"";position:absolute;top:0;left:50%;width:16px;height:16px;margin-left:-8px;border-radius:50%;background:var(--bg-2);border:2px solid var(--gold)}
-.rio{position:relative;border-radius:8px;overflow:hidden;min-height:420px;display:flex;align-items:flex-end}
-.rio img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.rio>div{position:relative;width:100%;padding:90px 22px 22px;background:linear-gradient(0deg,rgba(11,29,23,.94) 0%,rgba(11,29,23,.82) 40%,rgba(11,29,23,.45) 72%,rgba(11,29,23,0) 100%)}
-.rio h3{font-size:26px}
-.rio .cidade{color:var(--gold);font-size:14px;margin:2px 0 10px}
-.rio p{margin:0;font-size:15px;color:var(--muted)}
-
-/* Galeria */
-.galeria{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.galeria figure{margin:0;position:relative;border-radius:6px;overflow:hidden}
-.galeria figure:first-child{grid-column:span 2;grid-row:span 2}
-.galeria button{display:block;width:100%;height:100%;padding:0;border:0;background:none;cursor:zoom-in}
-.galeria img{width:100%;height:100%;aspect-ratio:16/9;object-fit:cover;transition:transform .4s}
-.galeria figure:first-child img{aspect-ratio:auto;position:absolute;inset:0}
-.galeria button:hover img{transform:scale(1.03)}
-.galeria figcaption{position:absolute;left:0;right:0;bottom:0;padding:28px 14px 10px;font-size:14px;color:var(--text);background:linear-gradient(0deg,rgba(11,29,23,.85),rgba(11,29,23,0));pointer-events:none}
-
-.lupa{padding:0;border:0;background:transparent;color:var(--text);max-width:min(1600px,94vw);max-height:94vh;overflow:visible}
-.lupa::backdrop{background:rgba(5,14,11,.93)}
-.lupa img{max-height:82vh;width:auto;margin:0 auto;border-radius:6px}
-.lupa p{margin:10px 0 0;text-align:center;color:var(--muted);font-size:15px}
-.lupa button{position:absolute;width:48px;height:48px;border-radius:50%;border:1px solid var(--gold);background:rgba(11,29,23,.85);color:var(--gold);font-size:26px;line-height:1;cursor:pointer}
-.lupa button:hover{background:rgba(11,29,23,1)}
-.lupa .fechar{top:12px;right:12px;font-size:30px}
-.lupa .antes,.lupa .depois{top:calc(50% - 40px)}
-.lupa .antes{left:12px}
-.lupa .depois{right:12px}
-
-/* Trailer */
-.video{position:relative;aspect-ratio:16/9;border-radius:8px;overflow:hidden;background:#000}
-.video iframe,.video button{position:absolute;inset:0;width:100%;height:100%;border:0}
-.video button{cursor:pointer;padding:0;background:url(img/salto.jpg) center/cover}
-.video button span{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:84px;height:84px;border-radius:50%;background:rgba(11,29,23,.8);border:2px solid var(--gold)}
-.video button span::after{content:"";position:absolute;left:33px;top:24px;border-left:26px solid var(--gold);border-top:18px solid transparent;border-bottom:18px solid transparent}
-.video button:hover span{background:rgba(11,29,23,.95)}
-
-/* Download */
-.baixar{background:var(--bg-2)}
-.caixa{display:grid;grid-template-columns:1fr 1fr;gap:48px}
-.caixa h3{font-size:22px;margin:0 0 12px}
-.caixa ol,.caixa ul{margin:0;padding-left:20px}
-.caixa li{margin-bottom:6px}
-.versao{color:var(--muted);font-size:14px;margin:14px 0 0;overflow-wrap:anywhere}
-.hash{display:flex;align-items:center;gap:12px;background:var(--panel);padding:10px 10px 10px 12px;border-radius:6px;margin-top:10px}
-.hash code{flex:1;font-size:12px;word-break:break-all;color:var(--muted)}
-.hash button{flex:none;font:700 13px Lato,sans-serif;color:var(--gold);background:none;border:1px solid var(--line);border-radius:4px;padding:6px 10px;cursor:pointer}
-.hash button:hover{border-color:var(--gold)}
-.versao code{font-size:13px;color:var(--text)}
-.aviso{color:var(--muted);font-size:15px;margin-top:22px}
-
-footer{padding:40px 0 56px;color:var(--muted);font-size:14px;border-top:1px solid var(--line)}
-footer .wrap{display:flex;flex-wrap:wrap;gap:12px 32px;justify-content:space-between}
-footer a{color:var(--muted)}
-
-@media (max-width:900px){
-  nav ul{gap:16px}
-  .sobre,.caixa,.cena,.cena:nth-child(n){grid-template-columns:1fr;gap:22px}
-  .cena{margin-top:56px}
-  .cena:nth-child(even) img{order:0}
-  .lista-rios{grid-template-columns:1fr;gap:30px}
-  .lista-rios::before{display:none}
-  .barco{text-align:left;padding:0 0 0 26px;margin-bottom:10px}
-  .barco::before{left:0;top:3px;margin-left:0}
-  .rio{min-height:320px}
-  .lupa button{width:40px;height:40px;font-size:22px}
-  .lupa .fechar{top:8px;right:8px;font-size:26px}
-  .lupa .antes{left:8px}
-  .lupa .depois{right:8px}
-}
-@media (max-width:560px){
-  .wrap{padding:0 16px}
-  nav .marca span{display:none}
-  nav ul{gap:18px}
-  .capa{background-position:62% center}
-  .capa .linha{font-size:19px}
-  .galeria{grid-template-columns:1fr 1fr;gap:10px}
-  .galeria figure:first-child{grid-row:auto}
-  .galeria figure:first-child img{position:static;aspect-ratio:16/9}
-  .galeria figure:last-child{grid-column:span 2}
-  .galeria figcaption{display:none}
-  section{padding:72px 0}
-}
-@media (prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto}
-  .galeria img,nav{transition:none}
-}
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@1,500&family=Alegreya+SC:wght@500;700;800&family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
 </head>
-<body>
+<body class="overflow-x-clip">
 
-<nav>
-  <div class="wrap">
-    <a class="marca" href="#"><img src="img/icone-64.png" width="30" height="30" alt=""><span>De Rio em Rio</span></a>
-    <ul>
-      <li><a href="#jogo">O jogo</a></li>
-      <li><a href="#rios">Rios</a></li>
-      <li><a href="#trailer">Trailer</a></li>
-      <li><a href="#baixar">Baixar</a></li>
+<!-- Barra de cima -->
+<nav id="topo" class="fixed inset-x-0 top-0 z-40 border-b border-transparent transition-colors duration-500">
+  <div class="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-8">
+    <a href="#capa" class="flex items-center gap-3 font-display text-lg">
+      <img src="img/icone-64.png" width="32" height="32" alt="" class="size-8 rounded-lg">
+      <span>De Rio em Rio</span>
+    </a>
+    <ul class="hidden items-center gap-8 text-[15px] md:flex">
+      <li><a class="transition hover:text-ouro" data-link href="#pescaria">A pescaria</a></li>
+      <li><a class="transition hover:text-ouro" data-link href="#rios">Rios</a></li>
+      <li><a class="transition hover:text-ouro" data-link href="#especies">Espécies</a></li>
+      <li><a class="transition hover:text-ouro" data-link href="#trailer">Trailer</a></li>
+      <li><a href="#baixar" class="botao-ouro !px-5 !py-2 text-sm">Baixar grátis</a></li>
     </ul>
+    <button type="button" id="abrir-menu" class="grid size-11 place-items-center rounded-full border border-creme/20 bg-creme/5 md:hidden" aria-label="Abrir menu">
+      <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
+    </button>
   </div>
 </nav>
 
-<header class="capa">
-  <div class="wrap">
-    <h1><img class="logo" src="img/logo-900.png" width="900" height="450" alt="De Rio em Rio"></h1>
-    <p class="linha">Jogo de pesca nos rios de Mato Grosso, feito em Santo Antônio de Leverger.</p>
-    <div class="botoes">
-      <a class="botao cheio" href="#baixar">Baixar para Windows</a>
-      <a class="botao vazio" href="#trailer">Ver o trailer</a>
+<dialog id="menu" class="m-0 h-dvh max-h-none w-full max-w-none bg-rio-950/97 p-0 text-creme backdrop:bg-transparent">
+  <div class="flex h-full flex-col px-6 pt-5 pb-10">
+    <div class="flex items-center justify-between">
+      <span class="font-display text-lg">De Rio em Rio</span>
+      <button type="button" id="fechar-menu" class="grid size-11 place-items-center rounded-full border border-creme/20" aria-label="Fechar menu">
+        <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
     </div>
-    <div class="info">PC Windows · Um jogador · Versão 1.0.59, em desenvolvimento</div>
+    <ul class="mt-16 space-y-5 font-display text-4xl">
+      <li><a href="#pescaria">A pescaria</a></li>
+      <li><a href="#rios">Rios</a></li>
+      <li><a href="#especies">Espécies</a></li>
+      <li><a href="#imagens">Imagens</a></li>
+      <li><a href="#trailer">Trailer</a></li>
+    </ul>
+    <a href="#baixar" class="botao-ouro mt-auto w-full">Baixar grátis para Windows</a>
   </div>
+</dialog>
+
+<!-- Capa -->
+<header id="capa" class="relative isolate flex h-svh min-h-[620px] items-end overflow-hidden">
+  <video data-capa-video class="absolute inset-0 -z-10 size-full object-cover" muted loop playsinline preload="auto" poster="media/capa.jpg">
+    <source src="media/capa.mp4" type="video/mp4">
+  </video>
+  <div data-capa-veu class="absolute inset-0 -z-10 bg-rio-950 opacity-0 transition-opacity duration-700"></div>
+  <div class="absolute inset-0 -z-10 bg-linear-to-t from-rio-900 via-rio-900/10 to-rio-950/50"></div>
+  <div class="absolute inset-0 -z-10 bg-linear-to-r from-rio-950/85 via-rio-950/35 to-transparent"></div>
+  <div class="grao pointer-events-none absolute inset-0 -z-10 opacity-[.08] mix-blend-overlay"></div>
+
+  <div data-capa-conteudo class="mx-auto w-full max-w-7xl px-5 pb-20 sm:px-8 sm:pb-24">
+    <p data-intro class="rotulo mb-5">Rio Cuiabá · Rio Mutum · Rio Paraguai</p>
+    <h1 data-intro><img src="img/logo-900.png" width="900" height="450" alt="De Rio em Rio" class="w-[min(560px,86vw)] drop-shadow-[0_8px_40px_rgb(0_0_0/.45)]"></h1>
+    <p data-intro class="mt-4 max-w-xl text-xl leading-relaxed text-creme/90 sm:text-2xl">
+      Jogo de pesca nos rios de Mato Grosso, feito em <em class="font-serif text-ouro">Santo Antônio de Leverger</em>.
+    </p>
+    <div data-intro class="mt-9 flex flex-wrap gap-3">
+      <a href="#baixar" class="botao-ouro">
+        <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 19h14"/></svg>
+        Baixar grátis para Windows
+      </a>
+      <a href="#trailer" class="botao-vidro" data-trailer-link>
+        <svg class="size-4" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l13-7.5z"/></svg>
+        Ver o trailer
+      </a>
+    </div>
+    <p data-intro class="mt-6 text-sm text-areia">Versão 1.0.59 · em desenvolvimento · não pede conta nem internet</p>
+  </div>
+
+  <a href="#numeros" class="absolute right-8 bottom-10 hidden flex-col items-center gap-3 text-xs tracking-[.3em] text-areia uppercase sm:flex" aria-label="Rolar para baixo">
+    <span class="[writing-mode:vertical-rl]">Rolar</span>
+    <span class="relative h-14 w-px overflow-hidden bg-creme/20"><span class="absolute inset-x-0 top-0 h-1/2 animate-desce bg-ouro"></span></span>
+  </a>
 </header>
 
 <main>
-<section id="jogo">
-  <div class="wrap">
-    <div class="sobre">
-      <div>
-        <h2>Do Cuiabá ao Paraguai</h2>
-        <p>Você começa no Rio Cuiabá com vara básica e minhoca a 1 m. Vende o que pesca na vila, troca o barco de madeira pelo bote com motor e depois pela lancha, e segue para o Rio Mutum, em Barão de Melgaço, e para o Rio Paraguai, em Cáceres.</p>
-        <p>Registre as oito espécies nos três rios no caderno do barqueiro. O último título do jogo é Guardião do Pantanal.</p>
+
+<!-- Faixa com as espécies -->
+<div class="relative overflow-hidden border-y border-creme/10 bg-rio-950 py-6" aria-hidden="true">
+  <div class="flex w-max animate-marquee gap-10 font-display text-[clamp(2rem,4vw,3.5rem)] leading-none whitespace-nowrap">
+    <span class="flex gap-10"><span>Lambari</span><span class="contorno">Pacu-peva</span><span>Piranha</span><span class="contorno">Pacu</span><span>Piraputanga</span><span class="contorno">Dourado</span><span>Cachara</span><span class="contorno">Pintado</span></span>
+    <span class="flex gap-10"><span>Lambari</span><span class="contorno">Pacu-peva</span><span>Piranha</span><span class="contorno">Pacu</span><span>Piraputanga</span><span class="contorno">Dourado</span><span>Cachara</span><span class="contorno">Pintado</span></span>
+  </div>
+</div>
+
+<!-- Apresentação e números -->
+<section id="numeros" class="relative py-28 sm:py-36">
+  <div class="mx-auto max-w-7xl px-5 sm:px-8">
+    <div class="grid gap-14 lg:grid-cols-[1.1fr_1fr] lg:items-end">
+      <div data-reveal>
+        <p class="rotulo mb-5">O jogo</p>
+        <h2 class="titulo-secao">Do Cuiabá<br><span class="font-serif text-ouro italic normal-case">ao</span> Paraguai</h2>
       </div>
-      <img src="img/heroi.jpg" width="1920" height="1080" alt="O pescador na lancha ao fim da tarde, no Rio Cuiabá" loading="lazy">
+      <div data-reveal class="space-y-5 text-lg leading-relaxed text-areia">
+        <p>Você começa no Rio Cuiabá com vara básica e minhoca a 1 m. Vende o que pesca na vila, troca o barco de madeira pelo bote com motor e depois pela lancha, e segue para o Rio Mutum, em Barão de Melgaço, e para o Rio Paraguai, em Cáceres.</p>
+        <p>Registre as oito espécies nos três rios no caderno do barqueiro. O último título do jogo é <span class="text-creme">Guardião do Pantanal</span>.</p>
+      </div>
     </div>
 
-    <div class="cenas">
-      <article class="cena">
-        <img src="img/boia.jpg" width="1920" height="1080" alt="Boia parada no rio, esperando a fisgada" loading="lazy">
-        <div><h3>Hora, isca e profundidade</h3><p>Decidem o que morde. O pacu come de manhã; a cachara sai ao anoitecer. O caderno mostra onde e como procurar cada espécie.</p></div>
-      </article>
-      <article class="cena">
-        <img src="img/salto.jpg" width="1920" height="1080" alt="Dourado saltando ao lado do barco" loading="lazy">
-        <div><h3>Cada peixe briga de um jeito</h3><p>O dourado arranca e salta, a piraputanga pede puxadas alternadas, a piranha segue um ritmo e o pintado precisa ser guiado pelo corredor.</p></div>
-      </article>
-      <article class="cena">
-        <img src="img/marina.jpg" width="1920" height="1080" alt="Barco passando em frente à vila" loading="lazy">
-        <div><h3>Venda e troque de barco</h3><p>Barco de madeira, bote com motor e lancha. O barco novo libera a viagem para outro rio.</p></div>
-      </article>
-      <article class="cena">
-        <img src="img/foto-trofeu.jpg" width="1280" height="800" alt="Pescador em pé no barco segurando um pacu para a foto" loading="lazy">
-        <div><h3>Foto, e depois guardar ou soltar</h3><p>Cinco poses para a foto da captura. Soltar o peixe também conta no caderno.</p></div>
-      </article>
+    <dl data-reveal-grupo class="mt-20 grid grid-cols-2 gap-px overflow-hidden rounded-3xl border border-creme/10 bg-creme/10 lg:grid-cols-4">
+      <div class="bg-rio-900 p-7 sm:p-9"><dt class="text-sm text-areia">rios para pescar</dt><dd class="mt-2 font-display text-6xl text-ouro sm:text-7xl" data-conta="3">3</dd></div>
+      <div class="bg-rio-900 p-7 sm:p-9"><dt class="text-sm text-areia">espécies no caderno</dt><dd class="mt-2 font-display text-6xl text-ouro sm:text-7xl" data-conta="8">8</dd></div>
+      <div class="bg-rio-900 p-7 sm:p-9"><dt class="text-sm text-areia">barcos, da madeira à lancha</dt><dd class="mt-2 font-display text-6xl text-ouro sm:text-7xl" data-conta="3">3</dd></div>
+      <div class="bg-rio-900 p-7 sm:p-9"><dt class="text-sm text-areia">o pintado chega a</dt><dd class="mt-2 font-display text-6xl text-ouro sm:text-7xl"><span data-conta="24">24</span><span class="text-3xl"> kg</span></dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- Uma pescaria -->
+<section id="pescaria" class="relative bg-rio-950 py-28 sm:py-36">
+  <div class="mx-auto max-w-7xl px-5 sm:px-8">
+    <div data-reveal class="max-w-2xl">
+      <p class="rotulo mb-5">Uma pescaria</p>
+      <h2 class="titulo-secao">Do lançamento<br>à foto no barco</h2>
+    </div>
+
+    <div class="mt-16 grid gap-10 lg:mt-8 lg:grid-cols-[1fr_1.35fr] lg:gap-16">
+      <ol class="space-y-14 lg:space-y-0">
+        <li data-passo="0" class="lg:flex lg:min-h-[78vh] lg:items-center">
+          <div>
+            <video data-auto class="mb-6 aspect-video w-full rounded-2xl object-cover lg:hidden" muted loop playsinline preload="none" poster="media/lancar.jpg"><source src="media/lancar.mp4" type="video/mp4"></video>
+            <span class="font-display text-ouro">01</span>
+            <h3 class="mt-2 font-display text-4xl sm:text-5xl">Lançar</h3>
+            <p class="mt-4 max-w-md text-lg leading-relaxed text-areia">Escolha a isca e a profundidade, segure para dar força e solte. Minhoca, milho, massa, plug, isca de peixe ou lambari vivo.</p>
+          </div>
+        </li>
+        <li data-passo="1" class="lg:flex lg:min-h-[78vh] lg:items-center">
+          <div>
+            <video data-auto class="mb-6 aspect-video w-full rounded-2xl object-cover lg:hidden" muted loop playsinline preload="none" poster="media/boia.jpg"><source src="media/boia.mp4" type="video/mp4"></video>
+            <span class="font-display text-ouro">02</span>
+            <h3 class="mt-2 font-display text-4xl sm:text-5xl">Olhar a boia</h3>
+            <p class="mt-4 max-w-md text-lg leading-relaxed text-areia">Hora, isca e profundidade decidem o que morde. O pacu come de manhã; a cachara sai ao anoitecer. O caderno mostra onde e como procurar cada espécie.</p>
+          </div>
+        </li>
+        <li data-passo="2" class="lg:flex lg:min-h-[78vh] lg:items-center">
+          <div>
+            <video data-auto class="mb-6 aspect-video w-full rounded-2xl object-cover lg:hidden" muted loop playsinline preload="none" poster="media/briga.jpg"><source src="media/briga.mp4" type="video/mp4"></video>
+            <span class="font-display text-ouro">03</span>
+            <h3 class="mt-2 font-display text-4xl sm:text-5xl">Brigar com o peixe</h3>
+            <p class="mt-4 max-w-md text-lg leading-relaxed text-areia">Cada peixe briga de um jeito. O dourado arranca e salta, a piraputanga pede puxadas alternadas, a piranha segue um ritmo e o pintado precisa ser guiado pelo corredor.</p>
+          </div>
+        </li>
+        <li data-passo="3" class="lg:flex lg:min-h-[78vh] lg:items-center">
+          <div>
+            <video data-auto class="mb-6 aspect-video w-full rounded-2xl object-cover lg:hidden" muted loop playsinline preload="none" poster="media/trofeu.jpg"><source src="media/trofeu.mp4" type="video/mp4"></video>
+            <span class="font-display text-ouro">04</span>
+            <h3 class="mt-2 font-display text-4xl sm:text-5xl">Foto, guardar ou soltar</h3>
+            <p class="mt-4 max-w-md text-lg leading-relaxed text-areia">Cinco poses para a foto da captura. Depois, guarde o peixe no barco ou devolva ao rio: soltar também conta no caderno.</p>
+          </div>
+        </li>
+        <li data-passo="4" class="lg:flex lg:min-h-[78vh] lg:items-center">
+          <div>
+            <video data-auto class="mb-6 aspect-video w-full rounded-2xl object-cover lg:hidden" muted loop playsinline preload="none" poster="media/barco.jpg"><source src="media/barco.mp4" type="video/mp4"></video>
+            <span class="font-display text-ouro">05</span>
+            <h3 class="mt-2 font-display text-4xl sm:text-5xl">Vender e trocar de barco</h3>
+            <p class="mt-4 max-w-md text-lg leading-relaxed text-areia">Venda o que pescou na vila. O bote com motor custa R$ 600 e a lancha, R$ 1.200; cada barco novo leva mais peixe e abre a viagem para outro rio.</p>
+          </div>
+        </li>
+      </ol>
+
+      <div class="hidden lg:block">
+        <div data-tela class="sticky top-[13vh] h-[74vh] overflow-hidden rounded-3xl border border-creme/10 bg-rio-900 shadow-[0_40px_120px_-40px_rgb(0_0_0/.8)]">
+          <video class="ativo absolute inset-0 size-full object-cover" muted loop playsinline preload="none" poster="media/lancar.jpg"><source src="media/lancar.mp4" type="video/mp4"></video>
+          <video class="absolute inset-0 size-full object-cover" muted loop playsinline preload="none" poster="media/boia.jpg"><source src="media/boia.mp4" type="video/mp4"></video>
+          <video class="absolute inset-0 size-full object-cover" muted loop playsinline preload="none" poster="media/briga.jpg"><source src="media/briga.mp4" type="video/mp4"></video>
+          <video class="absolute inset-0 size-full object-cover" muted loop playsinline preload="none" poster="media/trofeu.jpg"><source src="media/trofeu.mp4" type="video/mp4"></video>
+          <video class="absolute inset-0 size-full object-cover" muted loop playsinline preload="none" poster="media/barco.jpg"><source src="media/barco.mp4" type="video/mp4"></video>
+          <div class="pointer-events-none absolute inset-x-0 bottom-0 flex items-center gap-4 bg-linear-to-t from-rio-950/80 to-transparent px-7 pt-16 pb-6">
+            <span class="font-display text-lg"><span data-tela-num>01</span> <span class="text-areia">/ 05</span></span>
+            <span class="h-px flex-1 bg-creme/20"><span data-tela-barra class="block h-px w-1/5 bg-ouro transition-[width] duration-700"></span></span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<section id="rios" class="rios">
-  <div class="wrap">
-    <div class="titulo"><h2>Três rios de Mato Grosso</h2><p>Cada destino é uma versão estilizada do lugar real.</p></div>
-    <ol class="lista-rios">
-      <li>
-        <div class="barco">Barco de madeira</div>
-        <article class="rio">
-          <img src="img/morro.jpg" width="1920" height="1080" alt="O Rio Cuiabá visto do alto, com o Morro de Santo Antônio ao fundo" loading="lazy">
-          <div><h3>Rio Cuiabá</h3><div class="cidade">Santo Antônio de Leverger</div><p>Morro de Santo Antônio.<br>Lambari, pacu-peva e piranha.</p></div>
-        </article>
-      </li>
-      <li>
-        <div class="barco">Bote com motor</div>
-        <article class="rio">
-          <img src="img/mutum.jpg" width="1920" height="1080" alt="As curvas do Rio Mutum entre a mata, vistas do alto" loading="lazy">
-          <div><h3>Rio Mutum</h3><div class="cidade">Barão de Melgaço</div><p>Baía de Siá Mariana.<br>Pacu-peva, pacu e piraputanga.</p></div>
-        </article>
-      </li>
-      <li>
-        <div class="barco">Lancha</div>
-        <article class="rio">
-          <img src="img/paraguai.jpg" width="1920" height="1080" alt="O Rio Paraguai com a margem arborizada do Morro Pelado" loading="lazy">
-          <div><h3>Rio Paraguai</h3><div class="cidade">Cáceres</div><p>Morro Pelado.<br>Cachara, dourado e pintado.</p></div>
-        </article>
-      </li>
-    </ol>
-  </div>
-</section>
-
-<section aria-label="Imagens do jogo">
-  <div class="wrap">
-    <div class="galeria">
-      <figure><button type="button"><img src="img/amanhecer.jpg" width="1920" height="1080" alt="Névoa ao amanhecer no Rio Cuiabá." loading="lazy"></button><figcaption>Névoa ao amanhecer no Rio Cuiabá.</figcaption></figure>
-      <figure><button type="button"><img src="img/entardecer.jpg" width="1920" height="1080" alt="Fim de tarde diante do Morro de Santo Antônio." loading="lazy"></button><figcaption>Fim de tarde diante do Morro de Santo Antônio.</figcaption></figure>
-      <figure><button type="button"><img src="img/chuva.jpg" width="1920" height="1080" alt="Chuva de verão no Rio Paraguai." loading="lazy"></button><figcaption>Chuva de verão no Rio Paraguai.</figcaption></figure>
-      <figure><button type="button"><img src="img/pacu.jpg" width="1920" height="1080" alt="Pacu saindo da água no Rio Mutum." loading="lazy"></button><figcaption>Pacu saindo da água no Rio Mutum.</figcaption></figure>
-      <figure><button type="button"><img src="img/ceu.jpg" width="1920" height="1080" alt="O dourado no embarque." loading="lazy"></button><figcaption>O dourado no embarque.</figcaption></figure>
-      <figure><button type="button"><img src="img/velocidade.jpg" width="1920" height="1080" alt="A lancha no Rio Cuiabá." loading="lazy"></button><figcaption>A lancha no Rio Cuiabá.</figcaption></figure>
+<!-- Rios -->
+<section id="rios" class="relative">
+  <div class="mx-auto max-w-7xl px-5 pt-28 pb-16 sm:px-8 sm:pt-36">
+    <div data-reveal class="grid gap-8 lg:grid-cols-2 lg:items-end">
+      <div>
+        <p class="rotulo mb-5">Três destinos</p>
+        <h2 class="titulo-secao">Três rios de<br>Mato Grosso</h2>
+      </div>
+      <p class="max-w-md text-lg leading-relaxed text-areia lg:justify-self-end">Cada destino é uma versão estilizada do lugar real. O barco novo libera a viagem para o rio seguinte.</p>
     </div>
   </div>
+
+  <div>
+    <article data-rio class="sticky top-0 h-svh overflow-hidden">
+      <div data-rio-dentro class="relative isolate flex h-full items-end">
+        <video data-auto class="absolute inset-0 -z-10 size-full object-cover" muted loop playsinline preload="none" poster="media/rio-cuiaba.jpg"><source src="media/rio-cuiaba.mp4" type="video/mp4"></video>
+        <div class="absolute inset-0 -z-10 bg-linear-to-t from-rio-950/95 via-rio-950/30 to-rio-950/10"></div>
+        <div class="mx-auto grid w-full max-w-7xl gap-8 px-5 pb-14 sm:px-8 sm:pb-20 lg:grid-cols-[1fr_400px] lg:items-end">
+          <div>
+            <span class="contorno font-display text-[clamp(5rem,14vw,12rem)] leading-[.8]">01</span>
+            <h3 class="mt-3 font-display text-[clamp(3rem,8vw,6.5rem)] leading-[.9]">Rio Cuiabá</h3>
+            <p class="mt-3 text-lg text-ouro">Santo Antônio de Leverger</p>
+          </div>
+          <dl class="grid grid-cols-2 gap-x-6 gap-y-5 rounded-2xl border border-creme/15 bg-rio-950/55 p-6 text-sm backdrop-blur-md">
+            <div><dt class="text-areia">Marco</dt><dd class="mt-1 text-base text-creme">Morro de Santo Antônio</dd></div>
+            <div><dt class="text-areia">Barco</dt><dd class="mt-1 text-base text-creme">Barco de madeira</dd></div>
+            <div class="col-span-2"><dt class="text-areia">Espécies</dt><dd class="mt-2 flex flex-wrap gap-2"><span class="rounded-full border border-creme/20 px-3 py-1">Lambari</span><span class="rounded-full border border-creme/20 px-3 py-1">Pacu-peva</span><span class="rounded-full border border-creme/20 px-3 py-1">Piranha</span></dd></div>
+          </dl>
+        </div>
+      </div>
+    </article>
+    <article data-rio class="sticky top-0 h-svh overflow-hidden">
+      <div data-rio-dentro class="relative isolate flex h-full items-end">
+        <video data-auto class="absolute inset-0 -z-10 size-full object-cover" muted loop playsinline preload="none" poster="media/rio-mutum.jpg"><source src="media/rio-mutum.mp4" type="video/mp4"></video>
+        <div class="absolute inset-0 -z-10 bg-linear-to-t from-rio-950/95 via-rio-950/30 to-rio-950/10"></div>
+        <div class="mx-auto grid w-full max-w-7xl gap-8 px-5 pb-14 sm:px-8 sm:pb-20 lg:grid-cols-[1fr_400px] lg:items-end">
+          <div>
+            <span class="contorno font-display text-[clamp(5rem,14vw,12rem)] leading-[.8]">02</span>
+            <h3 class="mt-3 font-display text-[clamp(3rem,8vw,6.5rem)] leading-[.9]">Rio Mutum</h3>
+            <p class="mt-3 text-lg text-ouro">Barão de Melgaço</p>
+          </div>
+          <dl class="grid grid-cols-2 gap-x-6 gap-y-5 rounded-2xl border border-creme/15 bg-rio-950/55 p-6 text-sm backdrop-blur-md">
+            <div><dt class="text-areia">Marco</dt><dd class="mt-1 text-base text-creme">Baía de Siá Mariana</dd></div>
+            <div><dt class="text-areia">Barco</dt><dd class="mt-1 text-base text-creme">Bote com motor</dd></div>
+            <div class="col-span-2"><dt class="text-areia">Espécies</dt><dd class="mt-2 flex flex-wrap gap-2"><span class="rounded-full border border-creme/20 px-3 py-1">Pacu-peva</span><span class="rounded-full border border-creme/20 px-3 py-1">Pacu</span><span class="rounded-full border border-creme/20 px-3 py-1">Piraputanga</span></dd></div>
+          </dl>
+        </div>
+      </div>
+    </article>
+    <article data-rio class="sticky top-0 h-svh overflow-hidden">
+      <div data-rio-dentro class="relative isolate flex h-full items-end">
+        <video data-auto class="absolute inset-0 -z-10 size-full object-cover" muted loop playsinline preload="none" poster="media/rio-paraguai.jpg"><source src="media/rio-paraguai.mp4" type="video/mp4"></video>
+        <div class="absolute inset-0 -z-10 bg-linear-to-t from-rio-950/95 via-rio-950/30 to-rio-950/10"></div>
+        <div class="mx-auto grid w-full max-w-7xl gap-8 px-5 pb-14 sm:px-8 sm:pb-20 lg:grid-cols-[1fr_400px] lg:items-end">
+          <div>
+            <span class="contorno font-display text-[clamp(5rem,14vw,12rem)] leading-[.8]">03</span>
+            <h3 class="mt-3 font-display text-[clamp(3rem,8vw,6.5rem)] leading-[.9]">Rio Paraguai</h3>
+            <p class="mt-3 text-lg text-ouro">Cáceres</p>
+          </div>
+          <dl class="grid grid-cols-2 gap-x-6 gap-y-5 rounded-2xl border border-creme/15 bg-rio-950/55 p-6 text-sm backdrop-blur-md">
+            <div><dt class="text-areia">Marco</dt><dd class="mt-1 text-base text-creme">Morro Pelado</dd></div>
+            <div><dt class="text-areia">Barco</dt><dd class="mt-1 text-base text-creme">Lancha</dd></div>
+            <div class="col-span-2"><dt class="text-areia">Espécies</dt><dd class="mt-2 flex flex-wrap gap-2"><span class="rounded-full border border-creme/20 px-3 py-1">Cachara</span><span class="rounded-full border border-creme/20 px-3 py-1">Dourado</span><span class="rounded-full border border-creme/20 px-3 py-1">Pintado</span></dd></div>
+          </dl>
+        </div>
+      </div>
+    </article>
+  </div>
 </section>
 
-<dialog class="lupa" aria-label="Imagem ampliada">
-  <img src="" alt="">
-  <p></p>
-  <button type="button" class="fechar" aria-label="Fechar">×</button>
-  <button type="button" class="antes" aria-label="Imagem anterior">‹</button>
-  <button type="button" class="depois" aria-label="Próxima imagem">›</button>
+<!-- Espécies -->
+<section id="especies" class="relative z-10 bg-rio-900 py-28 sm:py-36">
+  <div class="mx-auto max-w-7xl px-5 sm:px-8">
+    <div data-reveal class="flex flex-wrap items-end justify-between gap-8">
+      <div>
+        <p class="rotulo mb-5">Caderno do barqueiro</p>
+        <h2 class="titulo-secao">Oito espécies</h2>
+      </div>
+      <div class="flex flex-wrap gap-2" role="group" aria-label="Filtrar por rio">
+        <button type="button" data-filtro="todos" aria-pressed="true" class="rounded-full border border-creme/20 px-4 py-2 text-sm font-bold transition hover:border-ouro">Todos</button>
+        <button type="button" data-filtro="cuiaba" aria-pressed="false" class="rounded-full border border-creme/20 px-4 py-2 text-sm font-bold transition hover:border-ouro">Rio Cuiabá</button>
+        <button type="button" data-filtro="mutum" aria-pressed="false" class="rounded-full border border-creme/20 px-4 py-2 text-sm font-bold transition hover:border-ouro">Rio Mutum</button>
+        <button type="button" data-filtro="paraguai" aria-pressed="false" class="rounded-full border border-creme/20 px-4 py-2 text-sm font-bold transition hover:border-ouro">Rio Paraguai</button>
+      </div>
+    </div>
+
+    <ul id="lista-especies" data-reveal-grupo class="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <li data-especie="cuiaba"><div class="group relative h-full overflow-hidden rounded-2xl border border-creme/10 bg-rio-800/50 p-6 transition duration-300 hover:-translate-y-1 hover:border-ouro/40 hover:bg-rio-800">
+        <span class="absolute inset-x-0 top-0 h-1" style="background:#b3c7b8"></span>
+        <div class="flex items-center justify-between gap-3 text-xs text-areia"><span>Rio Cuiabá</span><span class="font-bold tracking-wider uppercase" style="color:#b3c7b8">Comum</span></div>
+        <h3 class="mt-5 font-display text-3xl">Lambari</h3>
+        <div class="mt-2 flex gap-0.5" aria-label="1 de 5 estrelas"><svg class="size-4 text-ouro" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg><svg class="size-4 text-creme/15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg><svg class="size-4 text-creme/15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg><svg class="size-4 text-creme/15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg><svg class="size-4 text-creme/15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg></div>
+        <dl class="mt-6 grid grid-cols-2 gap-x-4 gap-y-3 border-t border-creme/10 pt-5 text-sm">
+          <div class="col-span-2"><dt class="text-areia">Isca</dt><dd class="text-creme">Minhoca</dd></div>
+          <div><dt class="text-areia">Profundidade</dt><dd class="text-creme">1 m</dd></div>
+          <div><dt class="text-areia">Mais ativo</dt><dd class="flex items-center gap-1.5 text-creme"><svg class="size-4 text-ouro" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v2M5.6 5.6l1.4 1.4M3 12h2M19 12h2M17 7l1.4-1.4"/><path d="M7 15a5 5 0 0110 0"/><path d="M3 19h18"/></svg>Manhã</dd></div>
+          <div class="col-span-2"><dt class="text-areia">Chega a</dt><dd class="font-display text-2xl text-ouro">60 g</dd></div>
+        </dl>
+      </div></li>
+      <li data-especie="cuiaba mutum"><div class="group relative h-full overflow-hidden rounded-2xl border border-creme/10 bg-rio-800/50 p-6 transition duration-300 hover:-translate-y-1 hover:border-ouro/40 hover:bg-rio-800">
+        <span class="absolute inset-x-0 top-0 h-1" style="background:#a6ad85"></span>
+        <div class="flex items-center justify-between gap-3 text-xs text-areia"><span>Rio Cuiabá · Rio Mutum</span><span class="font-bold tracking-wider uppercase" style="color:#a6ad85">Incomum</span></div>
+        <h3 class="mt-5 font-display text-3xl">Pacu-peva</h3>
+        <div class="mt-2 flex gap-0.5" aria-label="2 de 5 estrelas"><svg class="size-4 text-ouro" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg><svg class="size-4 text-ouro" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg><svg class="size-4 text-creme/15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg><svg class="size-4 text-creme/15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg><svg class="size-4 text-creme/15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg></div>
+        <dl class="mt-6 grid grid-cols-2 gap-x-4 gap-y-3 border-t border-creme/10 pt-5 text-sm">
+          <div class="col-span-2"><dt class="text-areia">Isca</dt><dd class="text-creme">Milho</dd></div>
+          <div><dt class="text-areia">Profundidade</dt><dd class="text-creme">2 m</dd></div>
+          <div><dt class="text-areia">Mais ativo</dt><dd class="flex items-center gap-1.5 text-creme"><svg class="size-4 text-ouro" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v2M5.6 5.6l1.4 1.4M3 12h2M19 12h2M17 7l1.4-1.4"/><path d="M7 15a5 5 0 0110 0"/><path d="M3 19h18"/></svg>Manhã</dd></div>
+          <div class="col-span-2"><dt class="text-areia">Chega a</dt><dd class="font-display text-2xl text-ouro">2 kg</dd></div>
+        </dl>
+      </div></li>
+      <li data-especie="cuiaba"><div class="group relative h-full overflow-hidden rounded-2xl border border-creme/10 bg-rio-800/50 p-6 transition duration-300 hover:-translate-y-1 hover:border-ouro/40 hover:bg-rio-800">
+        <span class="absolute inset-x-0 top-0 h-1" style="background:#c4523b"></span>
+        <div class="flex items-center justify-between gap-3 text-xs text-areia"><span>Rio Cuiabá</span><span class="font-bold tracking-wider uppercase" style="color:#c4523b">Raro</span></div>
+        <h3 class="mt-5 font-display text-3xl">Piranha</h3>
+        <div class="mt-2 flex gap-0.5" aria-label="3 de 5 estrelas"><svg class="size-4 text-ouro" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg><svg class="size-4 text-ouro" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg><svg class="size-4 text-ouro" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg><svg class="size-4 text-creme/15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg><svg class="size-4 text-creme/15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg></div>
+        <dl class="mt-6 grid grid-cols-2 gap-x-4 gap-y-3 border-t border-creme/10 pt-5 text-sm">
+          <div class="col-span-2"><dt class="text-areia">Isca</dt><dd class="text-creme">Isca de peixe</dd></div>
+          <div><dt class="text-areia">Profundidade</dt><dd class="text-creme">3 m</dd></div>
+          <div><dt class="text-areia">Mais ativo</dt><dd class="flex items-center gap-1.5 text-creme"><svg class="size-4 text-ouro" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>Tarde</dd></div>
+          <div class="col-span-2"><dt class="text-areia">Chega a</dt><dd class="font-display text-2xl text-ouro">1,2 kg</dd></div>
+        </dl>
+      </div></li>
+      <li data-especie="mutum"><div class="group relative h-full overflow-hidden rounded-2xl border border-creme/10 bg-rio-800/50 p-6 transition duration-300 hover:-translate-y-1 hover:border-ouro/40 hover:bg-rio-800">
+        <span class="absolute inset-x-0 top-0 h-1" style="background:#a1ba6e"></span>
+        <div class="flex items-center justify-between gap-3 text-xs text-areia"><span>Rio Mutum</span><span class="font-bold tracking-wider uppercase" style="color:#a1ba6e">Raro</span></div>
+        <h3 class="mt-5 font-display text-3xl">Pacu</h3>
+        <div class="mt-2 flex gap-0.5" aria-label="3 de 5 estrelas"><svg class="size-4 text-ouro" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg><svg class="size-4 text-ouro" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg><svg class="size-4 text-ouro" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg><svg class="size-4 text-creme/15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg><svg class="size-4 text-creme/15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg></div>
+        <dl class="mt-6 grid grid-cols-2 gap-x-4 gap-y-3 border-t border-creme/10 pt-5 text-sm">
+          <div class="col-span-2"><dt class="text-areia">Isca</dt><dd class="text-creme">Massa</dd></div>
+          <div><dt class="text-areia">Profundidade</dt><dd class="text-creme">2 m</dd></div>
+          <div><dt class="text-areia">Mais ativo</dt><dd class="flex items-center gap-1.5 text-creme"><svg class="size-4 text-ouro" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v2M5.6 5.6l1.4 1.4M3 12h2M19 12h2M17 7l1.4-1.4"/><path d="M7 15a5 5 0 0110 0"/><path d="M3 19h18"/></svg>Manhã</dd></div>
+          <div class="col-span-2"><dt class="text-areia">Chega a</dt><dd class="font-display text-2xl text-ouro">10 kg</dd></div>
+        </dl>
+      </div></li>
+      <li data-especie="mutum"><div class="group relative h-full overflow-hidden rounded-2xl border border-creme/10 bg-rio-800/50 p-6 transition duration-300 hover:-translate-y-1 hover:border-ouro/40 hover:bg-rio-800">
+        <span class="absolute inset-x-0 top-0 h-1" style="background:#e87a38"></span>
+        <div class="flex items-center justify-between gap-3 text-xs text-areia"><span>Rio Mutum</span><span class="font-bold tracking-wider uppercase" style="color:#e87a38">Incomum</span></div>
+        <h3 class="mt-5 font-display text-3xl">Piraputanga</h3>
+        <div class="mt-2 flex gap-0.5" aria-label="2 de 5 estrelas"><svg class="size-4 text-ouro" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg><svg class="size-4 text-ouro" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg><svg class="size-4 text-creme/15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg><svg class="size-4 text-creme/15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg><svg class="size-4 text-creme/15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg></div>
+        <dl class="mt-6 grid grid-cols-2 gap-x-4 gap-y-3 border-t border-creme/10 pt-5 text-sm">
+          <div class="col-span-2"><dt class="text-areia">Isca</dt><dd class="text-creme">Milho</dd></div>
+          <div><dt class="text-areia">Profundidade</dt><dd class="text-creme">1 m</dd></div>
+          <div><dt class="text-areia">Mais ativo</dt><dd class="flex items-center gap-1.5 text-creme"><svg class="size-4 text-ouro" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v2M5.6 5.6l1.4 1.4M3 12h2M19 12h2M17 7l1.4-1.4"/><path d="M7 15a5 5 0 0110 0"/><path d="M3 19h18"/></svg>Manhã</dd></div>
+          <div class="col-span-2"><dt class="text-areia">Chega a</dt><dd class="font-display text-2xl text-ouro">3,5 kg</dd></div>
+        </dl>
+      </div></li>
+      <li data-especie="paraguai"><div class="group relative h-full overflow-hidden rounded-2xl border border-creme/10 bg-rio-800/50 p-6 transition duration-300 hover:-translate-y-1 hover:border-ouro/40 hover:bg-rio-800">
+        <span class="absolute inset-x-0 top-0 h-1" style="background:#ffbd30"></span>
+        <div class="flex items-center justify-between gap-3 text-xs text-areia"><span>Rio Paraguai</span><span class="font-bold tracking-wider uppercase" style="color:#ffbd30">Lendário</span></div>
+        <h3 class="mt-5 font-display text-3xl">Dourado</h3>
+        <div class="mt-2 flex gap-0.5" aria-label="5 de 5 estrelas"><svg class="size-4 text-ouro" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg><svg class="size-4 text-ouro" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg><svg class="size-4 text-ouro" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg><svg class="size-4 text-ouro" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg><svg class="size-4 text-ouro" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg></div>
+        <dl class="mt-6 grid grid-cols-2 gap-x-4 gap-y-3 border-t border-creme/10 pt-5 text-sm">
+          <div class="col-span-2"><dt class="text-areia">Isca</dt><dd class="text-creme">Plug</dd></div>
+          <div><dt class="text-areia">Profundidade</dt><dd class="text-creme">3 m</dd></div>
+          <div><dt class="text-areia">Mais ativo</dt><dd class="flex items-center gap-1.5 text-creme"><svg class="size-4 text-ouro" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>Tarde</dd></div>
+          <div class="col-span-2"><dt class="text-areia">Chega a</dt><dd class="font-display text-2xl text-ouro">16 kg</dd></div>
+        </dl>
+      </div></li>
+      <li data-especie="paraguai"><div class="group relative h-full overflow-hidden rounded-2xl border border-creme/10 bg-rio-800/50 p-6 transition duration-300 hover:-translate-y-1 hover:border-ouro/40 hover:bg-rio-800">
+        <span class="absolute inset-x-0 top-0 h-1" style="background:#919c96"></span>
+        <div class="flex items-center justify-between gap-3 text-xs text-areia"><span>Rio Paraguai</span><span class="font-bold tracking-wider uppercase" style="color:#919c96">Épico</span></div>
+        <h3 class="mt-5 font-display text-3xl">Cachara</h3>
+        <div class="mt-2 flex gap-0.5" aria-label="4 de 5 estrelas"><svg class="size-4 text-ouro" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg><svg class="size-4 text-ouro" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg><svg class="size-4 text-ouro" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg><svg class="size-4 text-ouro" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg><svg class="size-4 text-creme/15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg></div>
+        <dl class="mt-6 grid grid-cols-2 gap-x-4 gap-y-3 border-t border-creme/10 pt-5 text-sm">
+          <div class="col-span-2"><dt class="text-areia">Isca</dt><dd class="text-creme">Isca de peixe</dd></div>
+          <div><dt class="text-areia">Profundidade</dt><dd class="text-creme">6 m</dd></div>
+          <div><dt class="text-areia">Mais ativo</dt><dd class="flex items-center gap-1.5 text-creme"><svg class="size-4 text-ouro" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 019.5 4 8 8 0 1020 14.5z"/></svg>Noite</dd></div>
+          <div class="col-span-2"><dt class="text-areia">Chega a</dt><dd class="font-display text-2xl text-ouro">15 kg</dd></div>
+        </dl>
+      </div></li>
+      <li data-especie="paraguai"><div class="group relative h-full overflow-hidden rounded-2xl border border-creme/10 bg-rio-800/50 p-6 transition duration-300 hover:-translate-y-1 hover:border-ouro/40 hover:bg-rio-800">
+        <span class="absolute inset-x-0 top-0 h-1" style="background:#99a8ab"></span>
+        <div class="flex items-center justify-between gap-3 text-xs text-areia"><span>Rio Paraguai</span><span class="font-bold tracking-wider uppercase" style="color:#99a8ab">Raro</span></div>
+        <h3 class="mt-5 font-display text-3xl">Pintado</h3>
+        <div class="mt-2 flex gap-0.5" aria-label="3 de 5 estrelas"><svg class="size-4 text-ouro" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg><svg class="size-4 text-ouro" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg><svg class="size-4 text-ouro" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg><svg class="size-4 text-creme/15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg><svg class="size-4 text-creme/15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg></div>
+        <dl class="mt-6 grid grid-cols-2 gap-x-4 gap-y-3 border-t border-creme/10 pt-5 text-sm">
+          <div class="col-span-2"><dt class="text-areia">Isca</dt><dd class="text-creme">Isca de peixe</dd></div>
+          <div><dt class="text-areia">Profundidade</dt><dd class="text-creme">7 m</dd></div>
+          <div><dt class="text-areia">Mais ativo</dt><dd class="flex items-center gap-1.5 text-creme"><svg class="size-4 text-ouro" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 019.5 4 8 8 0 1020 14.5z"/></svg>Noite</dd></div>
+          <div class="col-span-2"><dt class="text-areia">Chega a</dt><dd class="font-display text-2xl text-ouro">24 kg</dd></div>
+        </dl>
+      </div></li>
+    </ul>
+    <p class="mt-8 text-sm text-areia">Lambari vivo também serve de isca para piranha, dourado, cachara e pintado. Hora e profundidade de quando cada peixe está mais ativo no jogo.</p>
+  </div>
+</section>
+
+<!-- Imagens -->
+<section id="imagens" class="relative overflow-hidden bg-rio-950 py-28 sm:py-36">
+  <div class="mx-auto flex max-w-7xl flex-wrap items-end justify-between gap-6 px-5 sm:px-8">
+    <div data-reveal>
+      <p class="rotulo mb-5">Imagens do jogo</p>
+      <h2 class="titulo-secao">No barco</h2>
+    </div>
+    <div class="flex gap-2">
+      <button type="button" data-trilho-volta class="grid size-12 place-items-center rounded-full border border-creme/20 transition hover:border-ouro hover:text-ouro" aria-label="Imagens anteriores">
+        <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>
+      </button>
+      <button type="button" data-trilho-vai class="grid size-12 place-items-center rounded-full border border-creme/20 transition hover:border-ouro hover:text-ouro" aria-label="Próximas imagens">
+        <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div data-trilho class="sem-barra mt-12 flex cursor-grab snap-x snap-mandatory gap-4 overflow-x-auto px-5 select-none scroll-px-5 sm:px-8 sm:scroll-px-8 xl:px-[calc((100vw-80rem)/2+2rem)] xl:scroll-px-[calc((100vw-80rem)/2+2rem)]">
+    <figure class="shrink-0 snap-start"><button type="button" class="group relative block h-[clamp(300px,52vh,540px)] aspect-[4/5] overflow-hidden rounded-2xl"><img src="media/peixe-dourado.jpg" alt="Dourado erguido pelo pescador ao fim da tarde" class="size-full object-cover transition duration-700 group-hover:scale-105" loading="lazy" draggable="false"><figcaption class="absolute inset-x-0 bottom-0 bg-linear-to-t from-rio-950/85 to-transparent p-5 pt-14 text-left font-display text-2xl">Dourado</figcaption></button></figure>
+    <figure class="shrink-0 snap-start"><button type="button" class="group relative block h-[clamp(300px,52vh,540px)] aspect-video overflow-hidden rounded-2xl"><img src="img/salto.jpg" alt="Dourado saltando ao lado do barco" class="size-full object-cover transition duration-700 group-hover:scale-105" loading="lazy" draggable="false"></button></figure>
+    <figure class="shrink-0 snap-start"><button type="button" class="group relative block h-[clamp(300px,52vh,540px)] aspect-[4/5] overflow-hidden rounded-2xl"><img src="media/peixe-piranha.jpg" alt="Piranha na mão do pescador, sentado no barco de madeira" class="size-full object-cover transition duration-700 group-hover:scale-105" loading="lazy" draggable="false"><figcaption class="absolute inset-x-0 bottom-0 bg-linear-to-t from-rio-950/85 to-transparent p-5 pt-14 text-left font-display text-2xl">Piranha</figcaption></button></figure>
+    <figure class="shrink-0 snap-start"><button type="button" class="group relative block h-[clamp(300px,52vh,540px)] aspect-video overflow-hidden rounded-2xl"><img src="img/amanhecer.jpg" alt="O pescador no barco ao amanhecer, no Rio Cuiabá" class="size-full object-cover transition duration-700 group-hover:scale-105" loading="lazy" draggable="false"></button></figure>
+    <figure class="shrink-0 snap-start"><button type="button" class="group relative block h-[clamp(300px,52vh,540px)] aspect-[4/5] overflow-hidden rounded-2xl"><img src="media/peixe-pacu.jpg" alt="Pacu em destaque na mão do pescador, no Rio Mutum" class="size-full object-cover transition duration-700 group-hover:scale-105" loading="lazy" draggable="false"><figcaption class="absolute inset-x-0 bottom-0 bg-linear-to-t from-rio-950/85 to-transparent p-5 pt-14 text-left font-display text-2xl">Pacu</figcaption></button></figure>
+    <figure class="shrink-0 snap-start"><button type="button" class="group relative block h-[clamp(300px,52vh,540px)] aspect-video overflow-hidden rounded-2xl"><img src="img/chuva.jpg" alt="Chuva de verão no Rio Paraguai" class="size-full object-cover transition duration-700 group-hover:scale-105" loading="lazy" draggable="false"></button></figure>
+    <figure class="shrink-0 snap-start"><button type="button" class="group relative block h-[clamp(300px,52vh,540px)] aspect-[4/5] overflow-hidden rounded-2xl"><img src="media/peixe-piraputanga.jpg" alt="Piraputanga na mão do pescador, no Rio Mutum" class="size-full object-cover transition duration-700 group-hover:scale-105" loading="lazy" draggable="false"><figcaption class="absolute inset-x-0 bottom-0 bg-linear-to-t from-rio-950/85 to-transparent p-5 pt-14 text-left font-display text-2xl">Piraputanga</figcaption></button></figure>
+    <figure class="shrink-0 snap-start"><button type="button" class="group relative block h-[clamp(300px,52vh,540px)] aspect-video overflow-hidden rounded-2xl"><img src="img/velocidade.jpg" alt="A lancha no Rio Cuiabá" class="size-full object-cover transition duration-700 group-hover:scale-105" loading="lazy" draggable="false"></button></figure>
+    <figure class="shrink-0 snap-start"><button type="button" class="group relative block h-[clamp(300px,52vh,540px)] aspect-[4/5] overflow-hidden rounded-2xl"><img src="media/peixe-cachara.jpg" alt="Cachara na mão do pescador em pé, no Rio Paraguai" class="size-full object-cover transition duration-700 group-hover:scale-105" loading="lazy" draggable="false"><figcaption class="absolute inset-x-0 bottom-0 bg-linear-to-t from-rio-950/85 to-transparent p-5 pt-14 text-left font-display text-2xl">Cachara</figcaption></button></figure>
+    <figure class="shrink-0 snap-start"><button type="button" class="group relative block h-[clamp(300px,52vh,540px)] aspect-video overflow-hidden rounded-2xl"><img src="img/pacu.jpg" alt="Pacu saindo da água no Rio Mutum" class="size-full object-cover transition duration-700 group-hover:scale-105" loading="lazy" draggable="false"></button></figure>
+    <figure class="shrink-0 snap-start"><button type="button" class="group relative block h-[clamp(300px,52vh,540px)] aspect-video overflow-hidden rounded-2xl"><img src="img/marina.jpg" alt="Barco passando em frente à vila" class="size-full object-cover transition duration-700 group-hover:scale-105" loading="lazy" draggable="false"></button></figure>
+    <span class="w-px shrink-0" aria-hidden="true"></span>
+  </div>
+</section>
+
+<dialog class="lupa m-auto max-h-[94vh] max-w-[min(1600px,94vw)] overflow-visible bg-transparent p-0 text-creme" aria-label="Imagem ampliada">
+  <img src="" alt="" class="mx-auto max-h-[82vh] w-auto rounded-xl">
+  <p class="mt-3 text-center text-areia"></p>
+  <button type="button" data-lupa="fechar" class="absolute top-3 right-3 grid size-11 place-items-center rounded-full border border-ouro/60 bg-rio-950/80 text-ouro" aria-label="Fechar"><svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <button type="button" data-lupa="antes" class="absolute top-[calc(50%-40px)] left-3 grid size-11 place-items-center rounded-full border border-ouro/60 bg-rio-950/80 text-ouro" aria-label="Imagem anterior"><svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+  <button type="button" data-lupa="depois" class="absolute top-[calc(50%-40px)] right-3 grid size-11 place-items-center rounded-full border border-ouro/60 bg-rio-950/80 text-ouro" aria-label="Próxima imagem"><svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
 </dialog>
 
-<section id="trailer">
-  <div class="wrap">
-    <div class="titulo"><h2>Trailer</h2><p>Imagens gravadas no jogo.</p></div>
-    <div class="video" id="video">
-      <button type="button" aria-label="Assistir ao trailer"><span></span></button>
+<!-- Trailer -->
+<section id="trailer" class="relative bg-rio-900 py-28 sm:py-36">
+  <div class="mx-auto max-w-7xl px-5 sm:px-8">
+    <div data-reveal class="mb-12 flex flex-wrap items-end justify-between gap-6">
+      <div>
+        <p class="rotulo mb-5">Imagens gravadas no jogo</p>
+        <h2 class="titulo-secao">Trailer</h2>
+      </div>
+    </div>
+    <div data-reveal id="video" class="relative aspect-video overflow-hidden rounded-3xl border border-creme/10 bg-black shadow-[0_40px_120px_-30px_rgb(0_0_0/.9)]">
+      <button type="button" class="group absolute inset-0 size-full cursor-pointer" aria-label="Assistir ao trailer">
+        <img src="img/salto.jpg" alt="" class="absolute inset-0 size-full object-cover transition duration-1000 group-hover:scale-105" loading="lazy">
+        <span class="absolute inset-0 bg-rio-950/30 transition group-hover:bg-rio-950/10"></span>
+        <span class="absolute top-1/2 left-1/2 grid size-24 -translate-x-1/2 -translate-y-1/2 animate-pulso place-items-center rounded-full bg-ouro text-rio-900 transition duration-300 group-hover:scale-110 sm:size-28">
+          <svg class="ml-1 size-9" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l13-7.5z"/></svg>
+        </span>
+      </button>
     </div>
   </div>
 </section>
 
-<section id="baixar" class="baixar">
-  <div class="wrap">
-    <div class="titulo"><h2>Baixar para Windows</h2><p>Versão jogável em desenvolvimento, para demonstração. Não pede conta nem internet para jogar.</p></div>
-    <div class="caixa">
-      <div>
-        <a class="botao cheio" href="https://github.com/tiagogp/de-rio-em-rio/releases/download/v1.0.59/DE-RIO-EM-RIO-Windows-v1.0.59.zip">Baixar a versão 1.0.59</a>
-        <p class="versao">DE-RIO-EM-RIO-Windows-v1.0.59.zip · 261 MB · extraia antes de jogar</p>
-        <div class="hash"><code>SHA-256 <span id="sha">d30bdabe547c34cf7373df054f01f8adc83c83617086e6f1a4742a5ab6fa338e</span></code><button type="button" id="copiar">Copiar</button></div>
-        <p class="versao">Para conferir no PowerShell, na pasta do download: <code>Get-FileHash DE-RIO-EM-RIO-Windows-v1.0.59.zip</code></p>
-        <p class="versao"><a href="https://github.com/tiagogp/de-rio-em-rio/releases/tag/v1.0.59">Release e checksum no GitHub</a></p>
-        <h3 style="margin-top:30px">Requisitos</h3>
-        <ul>
-          <li>Windows 10 ou 11, 64 bits, com DirectX 12.</li>
-          <li>Placa de vídeo dedicada recomendada. Testado em Radeon RX 6600 XT, em 1920×1080.</li>
-          <li>Cerca de 700 MB livres.</li>
-          <li>Teclado e mouse ou controle de Xbox ou PlayStation.</li>
-          <li>Gráficos de Mínimo a Ultra, nas Opções.</li>
-        </ul>
+<!-- Baixar -->
+<section id="baixar" class="relative isolate overflow-hidden py-28 sm:py-36">
+  <img src="media/rio-mutum.jpg" alt="" class="absolute inset-0 -z-10 size-full object-cover" loading="lazy">
+  <div class="absolute inset-0 -z-10 bg-rio-950/80"></div>
+  <div class="absolute inset-0 -z-10 bg-linear-to-b from-rio-900 via-transparent to-rio-950"></div>
+
+  <div class="mx-auto max-w-7xl px-5 sm:px-8">
+    <div class="grid gap-12 lg:grid-cols-[1.15fr_1fr]">
+      <div data-reveal>
+        <p class="rotulo mb-5">Grátis para Windows</p>
+        <h2 class="titulo-secao">Baixe e vá<br>para o rio</h2>
+        <p class="mt-6 max-w-lg text-lg leading-relaxed text-areia">Versão jogável em desenvolvimento, para demonstração. Não pede conta nem internet para jogar.</p>
+
+        <div class="mt-10 flex flex-wrap items-center gap-4">
+          <a class="botao-ouro !px-8 !py-4 text-lg" href="https://github.com/tiagogp/de-rio-em-rio/releases/download/v1.0.59/DE-RIO-EM-RIO-Windows-v1.0.59.zip">
+            <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 19h14"/></svg>
+            Baixar a versão 1.0.59
+          </a>
+          <span class="text-sm text-areia">ZIP · 261 MB</span>
+        </div>
+
+        <div class="mt-8 max-w-xl rounded-2xl border border-creme/10 bg-rio-950/60 p-5 backdrop-blur">
+          <div class="flex items-center justify-between gap-3">
+            <span class="text-xs font-bold tracking-widest text-areia uppercase">SHA-256</span>
+            <button type="button" id="copiar" class="inline-flex items-center gap-1.5 rounded-full border border-creme/20 px-3 py-1 text-xs font-bold text-ouro transition hover:border-ouro">
+              <svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 012-2h10"/></svg>
+              <span>Copiar</span>
+            </button>
+          </div>
+          <code id="sha" class="mt-2 block font-mono text-xs leading-relaxed break-all text-creme/80">d30bdabe547c34cf7373df054f01f8adc83c83617086e6f1a4742a5ab6fa338e</code>
+          <p class="mt-4 text-xs text-areia">Para conferir no PowerShell, na pasta do download:</p>
+          <code class="mt-1 block font-mono text-xs break-all text-creme/80">Get-FileHash DE-RIO-EM-RIO-Windows-v1.0.59.zip</code>
+        </div>
+        <a href="https://github.com/tiagogp/de-rio-em-rio/releases/tag/v1.0.59" class="mt-5 inline-block text-sm text-ouro underline-offset-4 hover:underline">Release e checksum no GitHub</a>
       </div>
-      <div>
-        <h3>Como instalar</h3>
-        <ol>
-          <li>Baixe o ZIP.</li>
-          <li>Clique com o botão direito no arquivo e escolha <b>Extrair tudo</b>.</li>
-          <li>Mantenha todos os arquivos e pastas extraídos juntos.</li>
-          <li>Abra <b>De Rio em Rio.exe</b> dentro da pasta extraída.</li>
-          <li>Se o jogo não abrir com DirectX 12, use <b>Iniciar com DirectX 11.bat</b>, na mesma pasta.</li>
-        </ol>
-        <p class="aviso">Não abra o jogo direto de dentro do ZIP. O executável não tem assinatura digital: se o Windows mostrar um aviso, confira se baixou desta página e o SHA-256 acima antes de executar.</p>
+
+      <div data-reveal-grupo class="grid gap-4 self-start">
+        <div class="rounded-2xl border border-creme/10 bg-rio-900/80 p-7 backdrop-blur">
+          <h3 class="font-display text-2xl">Como instalar</h3>
+          <ol class="mt-5 space-y-4 text-areia">
+            <li class="flex gap-4"><span class="grid size-7 shrink-0 place-items-center rounded-full bg-ouro/15 text-sm font-bold text-ouro">1</span><span>Baixe o ZIP.</span></li>
+            <li class="flex gap-4"><span class="grid size-7 shrink-0 place-items-center rounded-full bg-ouro/15 text-sm font-bold text-ouro">2</span><span>Clique com o botão direito no arquivo e escolha <b class="text-creme">Extrair tudo</b>. Mantenha os arquivos e pastas extraídos juntos.</span></li>
+            <li class="flex gap-4"><span class="grid size-7 shrink-0 place-items-center rounded-full bg-ouro/15 text-sm font-bold text-ouro">3</span><span>Abra <b class="text-creme">De Rio em Rio.exe</b> dentro da pasta extraída.</span></li>
+            <li class="flex gap-4"><span class="grid size-7 shrink-0 place-items-center rounded-full bg-ouro/15 text-sm font-bold text-ouro">4</span><span>Se o jogo não abrir com DirectX 12, use <b class="text-creme">Iniciar com DirectX 11.bat</b>, na mesma pasta.</span></li>
+          </ol>
+          <p class="mt-6 border-t border-creme/10 pt-5 text-sm leading-relaxed text-areia">Não abra o jogo direto de dentro do ZIP. O executável não tem assinatura digital: se o Windows mostrar um aviso, confira se baixou desta página e o SHA-256 antes de executar.</p>
+        </div>
+        <div class="rounded-2xl border border-creme/10 bg-rio-900/80 p-7 backdrop-blur">
+          <h3 class="font-display text-2xl">Requisitos</h3>
+          <ul class="mt-5 grid gap-3 text-areia sm:grid-cols-2">
+            <li><span class="block text-xs tracking-widest text-ouro uppercase">Sistema</span>Windows 10 ou 11, 64 bits, DirectX 12</li>
+            <li><span class="block text-xs tracking-widest text-ouro uppercase">Vídeo</span>Placa dedicada recomendada. Testado em RX 6600 XT, 1920×1080</li>
+            <li><span class="block text-xs tracking-widest text-ouro uppercase">Espaço</span>Cerca de 700 MB livres</li>
+            <li><span class="block text-xs tracking-widest text-ouro uppercase">Controles</span>Teclado e mouse ou controle de Xbox ou PlayStation</li>
+            <li class="sm:col-span-2"><span class="block text-xs tracking-widest text-ouro uppercase">Gráficos</span>De Mínimo a Ultra, nas Opções</li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
 </section>
 </main>
 
-<footer>
-  <div class="wrap">
-    <div>Feito em Santo Antônio de Leverger, às margens do Rio Cuiabá, por <a href="https://tiagogp.com/">Tiago Guimarães Pinto</a>.<br>Imagens capturadas no jogo, em desenvolvimento.</div>
-    <div><a href="CREDITOS.txt">Créditos</a> · <a href="CREDITOS-AVES.txt">Aves</a> · <a href="CREDITOS-AUDIO.txt">Sons</a> · <a href="CREDITOS-INTERFACE.txt">Interface</a></div>
+<footer class="relative overflow-hidden border-t border-creme/10 bg-rio-950 pt-20 pb-10">
+  <div class="mx-auto max-w-7xl px-5 sm:px-8">
+    <div class="flex flex-wrap items-end justify-between gap-10">
+      <img src="img/logo-900.png" width="900" height="450" alt="De Rio em Rio" class="w-56 opacity-90" loading="lazy">
+      <nav aria-label="Créditos" class="flex flex-wrap gap-x-6 gap-y-2 text-sm text-areia">
+        <a class="hover:text-ouro" href="CREDITOS.txt">Créditos</a>
+        <a class="hover:text-ouro" href="CREDITOS-AVES.txt">Aves</a>
+        <a class="hover:text-ouro" href="CREDITOS-AUDIO.txt">Sons</a>
+        <a class="hover:text-ouro" href="CREDITOS-INTERFACE.txt">Interface</a>
+        <a class="hover:text-ouro" href="https://github.com/tiagogp/de-rio-em-rio/releases">Versões</a>
+      </nav>
+    </div>
+    <div class="mt-12 flex flex-wrap justify-between gap-4 border-t border-creme/10 pt-8 text-sm text-areia">
+      <p>Feito em Santo Antônio de Leverger, às margens do Rio Cuiabá, por <a class="text-creme underline-offset-4 hover:text-ouro hover:underline" href="https://tiagogp.com/">Tiago Guimarães Pinto</a>.</p>
+      <p>Imagens capturadas no jogo, em desenvolvimento.</p>
+    </div>
   </div>
 </footer>
 
-<script>
-// Carrega o YouTube só depois do clique (sem cookies até lá).
-document.querySelector('#video button').addEventListener('click', function () {
-  var f = document.createElement('iframe');
-  f.src = 'https://www.youtube-nocookie.com/embed/go7JlJ3Ju-8?autoplay=1&rel=0';
-  f.title = 'Trailer de De Rio em Rio';
-  f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
-  f.allowFullscreen = true;
-  this.replaceWith(f);
-});
-
-// Barra de cima fica sólida fora da capa e marca a seção visível.
-var nav = document.querySelector('nav');
-var links = [].slice.call(nav.querySelectorAll('ul a'));
-function aoRolar() {
-  nav.classList.toggle('cheia', window.scrollY > 40);
-  var atual = null;
-  links.forEach(function (a) {
-    var s = document.querySelector(a.getAttribute('href'));
-    if (s.getBoundingClientRect().top < window.innerHeight * 0.4) atual = a;
-  });
-  links.forEach(function (a) { a.classList.toggle('aqui', a === atual); });
-}
-window.addEventListener('scroll', aoRolar, { passive: true });
-aoRolar();
-
-// Galeria: abre a imagem grande; setas e Esc no teclado.
-var lupa = document.querySelector('.lupa');
-var fotos = [].slice.call(document.querySelectorAll('.galeria img'));
-var vista = 0;
-function mostrar(i) {
-  vista = (i + fotos.length) % fotos.length;
-  lupa.querySelector('img').src = fotos[vista].src;
-  lupa.querySelector('img').alt = fotos[vista].alt;
-  lupa.querySelector('p').textContent = fotos[vista].alt;
-}
-fotos.forEach(function (img, i) {
-  img.parentNode.addEventListener('click', function () { mostrar(i); lupa.showModal(); });
-});
-lupa.querySelector('.fechar').addEventListener('click', function () { lupa.close(); });
-lupa.querySelector('.antes').addEventListener('click', function () { mostrar(vista - 1); });
-lupa.querySelector('.depois').addEventListener('click', function () { mostrar(vista + 1); });
-lupa.addEventListener('click', function (e) { if (e.target === lupa) lupa.close(); });
-lupa.addEventListener('keydown', function (e) {
-  if (e.key === 'ArrowLeft') mostrar(vista - 1);
-  if (e.key === 'ArrowRight') mostrar(vista + 1);
-});
-
-// Copiar o SHA-256.
-document.getElementById('copiar').addEventListener('click', function () {
-  var b = this;
-  navigator.clipboard.writeText(document.getElementById('sha').textContent).then(function () {
-    b.textContent = 'Copiado';
-    setTimeout(function () { b.textContent = 'Copiar'; }, 2000);
-  });
-});
-</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<script src="assets/site.js" defer></script>
 </body>
 </html>
