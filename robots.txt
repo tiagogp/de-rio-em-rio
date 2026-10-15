@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tiagogp.github.io/de-rio-em-rio/sitemap.xml
